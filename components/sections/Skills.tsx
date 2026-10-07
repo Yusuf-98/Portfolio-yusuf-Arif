@@ -9,6 +9,7 @@ import {
 } from '@/lib/animations/staggered-item';
 import { Container } from '@/components/layout/Container';
 import { SkillBar } from '@/components/ui/SkillBar';
+import { FloatingBoat } from '@/lib/animations/floating-boat';
 
 // --- Tech icon data ---
 const TECH_ICONS = [
@@ -83,50 +84,52 @@ export function Skills() {
               {/* Row 1 */}
               <div className='flex flex-row gap-6'>
                 {TECH_ICONS.slice(0, 4).map((icon, i) => (
-                  <motion.div
-                    key={icon.name}
-                    variants={fadeInDown}
-                    initial='hidden'
-                    whileInView='visible'
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={transitionDelayed(
-                      D_ICON_ROW1_BASE + i * D_ICON_STAGGER
-                    )}
-                    className='flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 p-1 md:h-16 md:w-16'
-                  >
-                    <Image
-                      src={icon.src}
-                      alt={icon.name}
-                      width={48}
-                      height={48}
-                      className='h-full w-full object-contain'
-                    />
-                  </motion.div>
+                  <FloatingBoat key={icon.name} index={i}>
+                    <motion.div
+                      variants={fadeInDown}
+                      initial='hidden'
+                      whileInView='visible'
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={transitionDelayed(
+                        D_ICON_ROW1_BASE + i * D_ICON_STAGGER
+                      )}
+                      className='flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 p-1 md:h-16 md:w-16'
+                    >
+                      <Image
+                        src={icon.src}
+                        alt={icon.name}
+                        width={48}
+                        height={48}
+                        className='h-full w-full object-contain'
+                      />
+                    </motion.div>
+                  </FloatingBoat>
                 ))}
               </div>
 
               {/* Row 2 */}
               <div className='flex flex-row gap-6'>
                 {TECH_ICONS.slice(4, 8).map((icon, i) => (
-                  <motion.div
-                    key={icon.name}
-                    variants={fadeInUp}
-                    initial='hidden'
-                    whileInView='visible'
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={transitionDelayed(
-                      D_ICON_ROW2_BASE + i * D_ICON_STAGGER
-                    )}
-                    className='flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 p-1 md:h-16 md:w-16'
-                  >
-                    <Image
-                      src={icon.src}
-                      alt={icon.name}
-                      width={48}
-                      height={48}
-                      className='h-full w-full object-contain'
-                    />
-                  </motion.div>
+                  <FloatingBoat key={icon.name} index={i + 4}>
+                    <motion.div
+                      variants={fadeInUp}
+                      initial='hidden'
+                      whileInView='visible'
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={transitionDelayed(
+                        D_ICON_ROW2_BASE + i * D_ICON_STAGGER
+                      )}
+                      className='flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 p-1 md:h-16 md:w-16'
+                    >
+                      <Image
+                        src={icon.src}
+                        alt={icon.name}
+                        width={48}
+                        height={48}
+                        className='h-full w-full object-contain'
+                      />
+                    </motion.div>
+                  </FloatingBoat>
                 ))}
               </div>
             </div>
