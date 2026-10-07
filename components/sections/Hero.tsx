@@ -35,7 +35,7 @@ const GREETING_WORDS = [
 
 const TITLE_TEXT = 'Building fast & interactive web experiences.';
 const SUBTITLE_TEXT =
-  'Bridging creativity and functionality to deliver stunning, user-friendly web applications';
+  'I build pixel-accurate React and Next.js apps — every project here scores 90+ on mobile Lighthouse.';
 
 // --- Delay ---
 const D_GREETING = 0.2;
