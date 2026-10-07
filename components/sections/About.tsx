@@ -173,8 +173,7 @@ export function About() {
             matching the design to the pixel, keeping it fast on a mid-range phone,
             and handling the slow, empty and error states that real APIs produce. I
             work with React, Next.js and JavaScript/TypeScript, and I back my code
-            with automated tests and CI. Based in Indonesia, open to remote roles
-            worldwide, full-time or contract, and flexible with your time zone.
+            with automated tests and CI. Based in Indonesia.
           </motion.p>
 
           {/* Mobile images */}
