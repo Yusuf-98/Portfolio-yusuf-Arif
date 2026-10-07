@@ -26,7 +26,7 @@ const services = [
     icon: '/icons/service-quality.svg',
     title: 'Quality & Delivery',
     description:
-      'Shipping typed, tested code: TypeScript, automated tests, CI on every repo, and 90+ mobile Lighthouse scores.',
+      'Shipping typed, tested code: TypeScript, automated tests and CI on every repo.',
   },
 ];
 
