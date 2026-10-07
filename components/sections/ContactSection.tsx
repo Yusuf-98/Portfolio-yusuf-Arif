@@ -127,7 +127,7 @@ export default function ContactSection() {
   return (
     <section
       id='contact'
-      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pt-10 md:pt-0 pb-25 md:pb-30 z-20 overflow-x-hidden'
+      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pt-10 md:pt-0 pb-25 md:pb-30 z-20 overflow-x-clip'
     >
       {/* BoxPattern top left */}
       <motion.div
