@@ -12,7 +12,7 @@ type RatingCardProps = {
   introDelay?: number;
 };
 
-const SCORE_TEXT = 'Open to work';
+const SCORE_TEXT = 'Available';
 const TAGS = ['Remote', 'Full-time', 'Contract'];
 const CAPTION_TEXT = 'Worldwide, any time zone';
 const BORDER_DRAW_DURATION = 700;
