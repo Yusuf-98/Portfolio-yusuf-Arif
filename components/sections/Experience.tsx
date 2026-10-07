@@ -183,7 +183,7 @@ export function Experience({ workRef }: ExperienceProps) {
     <div ref={containerRef} className='relative overflow-hidden'>
       <motion.section
         ref={sectionRef}
-        className='w-full max-w-360 mx-auto bg-base-black pt-10 pb-20 md:pt-30 md:pb-25 overflow-x-hidden'
+        className='w-full max-w-360 mx-auto bg-base-black pt-10 pb-20 md:pt-30 md:pb-25 overflow-x-clip'
         style={{ position: 'relative', zIndex: 10 }}
       >
         <Container>
