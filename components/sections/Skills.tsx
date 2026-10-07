@@ -12,14 +12,14 @@ import { SkillBar } from '@/components/ui/SkillBar';
 
 // --- Tech icon data ---
 const TECH_ICONS = [
-  { name: 'Javascript', src: '/icons/tech/javascript.png' },
-  { name: 'CSS', src: '/icons/tech/css.png' },
   { name: 'HTML', src: '/icons/tech/html.png' },
-  { name: 'Express JS', src: '/icons/tech/express-js.png' },
-  { name: 'MongoDB', src: '/icons/tech/mongo-db.png' },
-  { name: 'React JS', src: '/icons/tech/react-js.png' },
+  { name: 'CSS', src: '/icons/tech/css.png' },
+  { name: 'JavaScript', src: '/icons/tech/javascript.png' },
   { name: 'TypeScript', src: '/icons/tech/typescript.png' },
-  { name: 'Docker', src: '/icons/tech/docker.png' },
+  { name: 'React', src: '/icons/tech/react-js.png' },
+  { name: 'Next.js', src: '/icons/tech/next-js.svg' },
+  { name: 'Tailwind CSS', src: '/icons/tech/tailwind-css.svg' },
+  { name: 'Figma', src: '/icons/tech/figma.svg' },
 ];
 
 // --- Skill bar data ---
@@ -80,7 +80,7 @@ export function Skills() {
 
             {/* Tech icon grid */}
             <div className='flex flex-col gap-6'>
-              {/* Baris 1 */}
+              {/* Row 1 */}
               <div className='flex flex-row gap-6'>
                 {TECH_ICONS.slice(0, 4).map((icon, i) => (
                   <motion.div
@@ -105,7 +105,7 @@ export function Skills() {
                 ))}
               </div>
 
-              {/* Baris 2 */}
+              {/* Row 2 */}
               <div className='flex flex-row gap-6'>
                 {TECH_ICONS.slice(4, 8).map((icon, i) => (
                   <motion.div
