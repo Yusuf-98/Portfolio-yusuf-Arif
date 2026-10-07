@@ -168,12 +168,13 @@ export function About() {
             transition={transitionDelayed(D_TEXT)}
             className='text-md md:text-sec-body font-medium tracking-t-none text-neutral-400 text-center w-full md:max-w-249'
           >
-            I&apos;m a frontend developer who builds pixel-accurate web apps with
-            React, Next.js and JavaScript/TypeScript. I ship complete products
-            (authentication, data fetching with TanStack Query, forms, cart and
-            checkout flows), with automated tests and CI on my recent projects.
-            Based in Indonesia, open to remote roles worldwide, full-time or
-            contract, and flexible to work in your time zone.
+            Learning is how I&apos;m wired, and frontend development is where I put
+            it to work. I care about the details that make an interface feel right:
+            matching the design to the pixel, keeping it fast on a mid-range phone,
+            and handling the slow, empty and error states that real APIs produce. I
+            work with React, Next.js and JavaScript/TypeScript, and I back my code
+            with automated tests and CI. Based in Indonesia, open to remote roles
+            worldwide, full-time or contract, and flexible with your time zone.
           </motion.p>
 
           {/* Mobile images */}
