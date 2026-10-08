@@ -267,13 +267,13 @@ export function Experience({ workRef }: ExperienceProps) {
                 </h3>
                 <div className='flex items-center'>
                   {[
-                    'z-10 -mr-3.75 h-12 w-12 md:-mr-5.25 md:h-16 md:w-16',
+                    'z-10 -mr-4 h-12 w-12 md:-mr-5.5 md:h-16 md:w-16',
                     'h-15 w-15 md:h-20 md:w-20',
-                    'z-10 -ml-3.75 h-12 w-12 md:-ml-5.25 md:h-16 md:w-16',
+                    'z-10 -ml-4 h-12 w-12 md:-ml-5.5 md:h-16 md:w-16',
                   ].map((size) => (
                     <div
                       key={size}
-                      className={`relative shrink-0 overflow-hidden rounded-full bg-neutral-950 ring-2 ring-base-black ${size}`}
+                      className={`relative shrink-0 overflow-hidden rounded-full bg-neutral-950 ${size}`}
                     >
                       <Image
                         src='/icons/others.png'
