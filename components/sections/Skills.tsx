@@ -26,11 +26,19 @@ const TECH_ICONS = [
 const STACK = [
   {
     group: 'Core',
-    items: ['JavaScript', 'TypeScript', 'React', 'Next.js'],
+    items: [
+      'HTML',
+      'JavaScript',
+      'TypeScript',
+      'React',
+      'Next.js',
+      'Vite',
+      'React Router',
+    ],
   },
   {
     group: 'Styling & UI',
-    items: ['Tailwind CSS', 'Radix UI', 'shadcn/ui', 'Framer Motion'],
+    items: ['CSS', 'Tailwind CSS', 'Radix UI', 'shadcn/ui', 'Framer Motion'],
   },
   {
     group: 'Data & State',
@@ -45,7 +53,15 @@ const STACK = [
   },
   {
     group: 'Quality & Delivery',
-    items: ['Vitest', 'Testing Library', 'ESLint', 'GitHub Actions', 'Vercel'],
+    items: [
+      'Vitest',
+      'Testing Library',
+      'ESLint',
+      'Lighthouse',
+      'Git',
+      'GitHub Actions',
+      'Vercel',
+    ],
   },
   {
     group: 'Design',
