@@ -102,7 +102,7 @@ export function Skills() {
             {/* Tech icon grid */}
             <div className='flex flex-col gap-6'>
               {/* Row 1 */}
-              <div className='flex flex-row gap-6'>
+              <div className='flex flex-row justify-between gap-6 md:justify-start'>
                 {TECH_ICONS.slice(0, 4).map((icon, i) => (
                   <FloatingBoat key={icon.name} index={i}>
                     <motion.div
@@ -113,7 +113,7 @@ export function Skills() {
                       transition={transitionDelayed(
                         D_ICON_ROW1_BASE + i * D_ICON_STAGGER
                       )}
-                      className='flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 p-1 md:h-16 md:w-16'
+                      className='flex h-16 w-16 items-center justify-center rounded-full border border-neutral-800 p-1'
                     >
                       <Image
                         src={icon.src}
@@ -128,7 +128,7 @@ export function Skills() {
               </div>
 
               {/* Row 2 */}
-              <div className='flex flex-row gap-6'>
+              <div className='flex flex-row justify-between gap-6 md:justify-start'>
                 {TECH_ICONS.slice(4, 8).map((icon, i) => (
                   <FloatingBoat key={icon.name} index={i + 4}>
                     <motion.div
@@ -139,7 +139,7 @@ export function Skills() {
                       transition={transitionDelayed(
                         D_ICON_ROW2_BASE + i * D_ICON_STAGGER
                       )}
-                      className='flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 p-1 md:h-16 md:w-16'
+                      className='flex h-16 w-16 items-center justify-center rounded-full border border-neutral-800 p-1'
                     >
                       <Image
                         src={icon.src}
