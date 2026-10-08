@@ -14,7 +14,7 @@ import {
 export default function WorkSection() {
   return (
     <section className='relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20 z-20'>
-      {/* --- Box pattern kanan bawah --- */}
+      {/* --- Box pattern --- */}
       <motion.div
         variants={fadeIn}
         initial='hidden'
@@ -54,7 +54,7 @@ export default function WorkSection() {
             transition={transitionDelayed(0.15)}
             className='text-display-md tracking-t-none font-extrabold text-neutral-25 text-center md:text-sec-title'
           >
-            PROFESIONAL WORK
+            MY JOURNEY
           </motion.h2>
         </div>
 
