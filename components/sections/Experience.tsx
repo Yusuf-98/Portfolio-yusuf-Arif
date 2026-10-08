@@ -267,9 +267,9 @@ export function Experience({ workRef }: ExperienceProps) {
                 </h3>
                 <div className='flex items-center'>
                   {[
-                    '-mr-4 h-12 w-12 md:-mr-5 md:h-16 md:w-16',
-                    'z-10 h-15 w-15 md:h-20 md:w-20',
-                    '-ml-4 h-12 w-12 md:-ml-5 md:h-16 md:w-16',
+                    'z-10 -mr-3.75 h-12 w-12 md:-mr-5.25 md:h-16 md:w-16',
+                    'h-15 w-15 md:h-20 md:w-20',
+                    'z-10 -ml-3.75 h-12 w-12 md:-ml-5.25 md:h-16 md:w-16',
                   ].map((size) => (
                     <div
                       key={size}
