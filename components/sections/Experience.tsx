@@ -267,20 +267,26 @@ export function Experience({ workRef }: ExperienceProps) {
                 </h3>
                 <div className='flex items-center'>
                   {[
-                    'z-10 -mr-4 h-12 w-12 md:-mr-5.5 md:h-16 md:w-16',
-                    'h-15 w-15 md:h-20 md:w-20',
-                    'z-10 -ml-4 h-12 w-12 md:-ml-5.5 md:h-16 md:w-16',
-                  ].map((size) => (
+                    {
+                      box: 'z-10 -mr-4 h-9 w-9 md:-mr-5.5 md:h-12 md:w-12',
+                      img: 'scale-133',
+                    },
+                    { box: 'h-15 w-15 md:h-20 md:w-20', img: '' },
+                    {
+                      box: 'z-10 -ml-4 h-9 w-9 md:-ml-5.5 md:h-12 md:w-12',
+                      img: 'scale-133',
+                    },
+                  ].map(({ box, img }) => (
                     <div
-                      key={size}
-                      className={`relative shrink-0 overflow-hidden rounded-full bg-neutral-950 ${size}`}
+                      key={box}
+                      className={`relative shrink-0 overflow-hidden rounded-full bg-neutral-950 ${box}`}
                     >
                       <Image
                         src='/icons/others.png'
                         alt=''
                         fill
                         sizes='(min-width: 768px) 80px, 60px'
-                        className='object-cover'
+                        className={`object-cover ${img}`}
                       />
                     </div>
                   ))}
