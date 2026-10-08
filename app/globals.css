@@ -145,10 +145,6 @@
     2.25rem
   );
 
-  /* --- Work card logo --- */
-  --work-logo-width: clamp(4.75rem, 2.036rem + 5.655vw, 7.125rem);
-  --work-logo-height: clamp(2rem, 0.857rem + 2.381vw, 3rem);
-
   /* --- Responsive section typography --- */
   --text-sec-label: clamp(1rem, 0.857rem + 0.298vw, 1.125rem);
   --text-sec-label--line-height: clamp(1.875rem, 1.732rem + 0.298vw, 2rem);

@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { CornerGlow } from '@/lib/animations/corner-glow';
 import { FloatingBoat } from '@/lib/animations/floating-boat';
@@ -11,8 +10,6 @@ interface WorkCardProps {
   year: string;
   title: string;
   description: string;
-  logo: string;
-  logoAlt: string;
   index?: number;
 }
 
@@ -20,8 +17,6 @@ export default function WorkCard({
   year,
   title,
   description,
-  logo,
-  logoAlt,
   index = 0,
 }: WorkCardProps) {
   return (
@@ -70,23 +65,6 @@ export default function WorkCard({
               >
                 {title}
               </span>
-            </div>
-
-            {/* Company logo */}
-            <div
-              className='relative shrink-0'
-              style={{
-                width: 'var(--work-logo-width)',
-                height: 'var(--work-logo-height)',
-              }}
-            >
-              <Image
-                src={logo}
-                alt={logoAlt}
-                fill
-                sizes='(max-width: 768px) 76px, 114px'
-                className='object-contain object-left md:object-right'
-              />
             </div>
           </div>
 

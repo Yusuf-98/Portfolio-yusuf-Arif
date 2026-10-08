@@ -9,39 +9,31 @@ import WorkCard from './WorkCard';
 const workData = [
   {
     id: 1,
-    year: '2020 - 2022',
-    title: 'Frontend Developer',
+    year: 'University years',
+    title: 'Founder, Internet Café',
     description:
-      'Builds responsive and high-performance web applications with clean, maintainable code. Expert in translating UI/UX designs into pixel-perfect interfaces using modern frameworks. Focused on optimizing performance, accessibility, and seamless user experiences',
-    logo: '/images/upwork.png',
-    logoAlt: 'Upwork',
+      "The go-to consultant for my classmates' PC builds, then ran my own internet café, installing and maintaining every machine and the whole network myself.",
   },
   {
     id: 2,
-    year: '2020 - 2022',
-    title: 'Frontend Developer',
+    year: 'Business career',
+    title: 'Division Manager → Director',
     description:
-      'Builds responsive and high-performance web applications with clean, maintainable code. Expert in translating UI/UX designs into pixel-perfect interfaces using modern frameworks. Focused on optimizing performance, accessibility, and seamless user experiences',
-    logo: '/images/trello.png',
-    logoAlt: 'Trello',
+      'Led a wind-turbine division, then directed two companies: teams, projects, clients and budgets. That ownership is how I work today.',
   },
   {
     id: 3,
-    year: '2020 - 2022',
-    title: 'Frontend Developer',
+    year: '2025',
+    title: 'Back to building',
     description:
-      'Builds responsive and high-performance web applications with clean, maintainable code. Expert in translating UI/UX designs into pixel-perfect interfaces using modern frameworks. Focused on optimizing performance, accessibility, and seamless user experiences',
-    logo: '/images/zoom.png',
-    logoAlt: 'Zoom',
+      "Started coding again through freeCodeCamp's Responsive Web Design curriculum.",
   },
   {
     id: 4,
-    year: '2020 - 2022',
+    year: '2026 – Present',
     title: 'Frontend Developer',
     description:
-      'Builds responsive and high-performance web applications with clean, maintainable code. Expert in translating UI/UX designs into pixel-perfect interfaces using modern frameworks. Focused on optimizing performance, accessibility, and seamless user experiences',
-    logo: '/images/zapier.png',
-    logoAlt: 'Zapier',
+      'Graduated from an intensive frontend bootcamp with an A, earned the freeCodeCamp Responsive Web Design certification, and shipped production-grade React and Next.js apps with tests, CI and 90+ mobile Lighthouse scores.',
   },
 ];
 
@@ -244,8 +236,6 @@ export default function WorkTimeline() {
                   year={item.year}
                   title={item.title}
                   description={item.description}
-                  logo={item.logo}
-                  logoAlt={item.logoAlt}
                   index={index}
                 />
               </div>
@@ -257,8 +247,6 @@ export default function WorkTimeline() {
                     year={item.year}
                     title={item.title}
                     description={item.description}
-                    logo={item.logo}
-                    logoAlt={item.logoAlt}
                     index={index}
                   />
                 )}
@@ -289,8 +277,6 @@ export default function WorkTimeline() {
                     year={item.year}
                     title={item.title}
                     description={item.description}
-                    logo={item.logo}
-                    logoAlt={item.logoAlt}
                     index={index}
                   />
                 )}
