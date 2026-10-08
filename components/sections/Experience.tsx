@@ -265,14 +265,21 @@ export function Experience({ workRef }: ExperienceProps) {
                 <h3 className='text-xl font-bold text-neutral-25 md:text-sec-card-title'>
                   WHAT YOUR TEAM GETS
                 </h3>
-                <div className='relative h-15 w-15 shrink-0 overflow-hidden rounded-full bg-neutral-950 md:h-20 md:w-20'>
-                  <Image
-                    src='/icons/others.png'
-                    alt=''
-                    fill
-                    sizes='(min-width: 768px) 80px, 60px'
-                    className='object-cover'
-                  />
+                <div className='flex'>
+                  {[0, 1, 2].map((i) => (
+                    <div
+                      key={i}
+                      className='relative h-15 w-15 shrink-0 overflow-hidden rounded-full bg-neutral-950 ring-2 ring-base-black not-first:-ml-4 md:h-20 md:w-20 md:not-first:-ml-6'
+                    >
+                      <Image
+                        src='/icons/others.png'
+                        alt=''
+                        fill
+                        sizes='(min-width: 768px) 80px, 60px'
+                        className='object-cover'
+                      />
+                    </div>
+                  ))}
                 </div>
                 <div className='flex w-full flex-col'>
                   {COMPARISON.map((item, index) => (
