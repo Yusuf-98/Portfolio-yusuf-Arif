@@ -265,11 +265,15 @@ export function Experience({ workRef }: ExperienceProps) {
                 <h3 className='text-xl font-bold text-neutral-25 md:text-sec-card-title'>
                   WHAT YOUR TEAM GETS
                 </h3>
-                <div className='flex'>
-                  {[0, 1, 2].map((i) => (
+                <div className='flex items-center'>
+                  {[
+                    '-mr-4 h-12 w-12 md:-mr-5 md:h-16 md:w-16',
+                    'z-10 h-15 w-15 md:h-20 md:w-20',
+                    '-ml-4 h-12 w-12 md:-ml-5 md:h-16 md:w-16',
+                  ].map((size) => (
                     <div
-                      key={i}
-                      className='relative h-15 w-15 shrink-0 overflow-hidden rounded-full bg-neutral-950 ring-2 ring-base-black not-first:-ml-4 md:h-20 md:w-20 md:not-first:-ml-6'
+                      key={size}
+                      className={`relative shrink-0 overflow-hidden rounded-full bg-neutral-950 ring-2 ring-base-black ${size}`}
                     >
                       <Image
                         src='/icons/others.png'
