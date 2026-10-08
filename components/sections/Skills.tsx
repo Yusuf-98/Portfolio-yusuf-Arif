@@ -8,7 +8,6 @@ import {
   transitionDelayed,
 } from '@/lib/animations/staggered-item';
 import { Container } from '@/components/layout/Container';
-import { SkillBar } from '@/components/ui/SkillBar';
 import { FloatingBoat } from '@/lib/animations/floating-boat';
 
 // --- Tech icon data ---
@@ -23,14 +22,35 @@ const TECH_ICONS = [
   { name: 'Figma', src: '/icons/tech/figma.svg' },
 ];
 
-// --- Skill bar data ---
-const SKILLS = [
-  { name: 'React JS', percentage: 50 },
-  { name: 'HTML', percentage: 80 },
-  { name: 'Tailwind CSS', percentage: 90 },
-  { name: 'HTML', percentage: 100 },
-  { name: 'Docker', percentage: 70 },
-  { name: 'Javascript', percentage: 90 },
+// --- Stack data ---
+const STACK = [
+  {
+    group: 'Core',
+    items: ['JavaScript', 'TypeScript', 'React', 'Next.js'],
+  },
+  {
+    group: 'Styling & UI',
+    items: ['Tailwind CSS', 'Radix UI', 'shadcn/ui', 'Framer Motion'],
+  },
+  {
+    group: 'Data & State',
+    items: [
+      'TanStack Query',
+      'Redux Toolkit',
+      'Zustand',
+      'React Hook Form',
+      'Zod',
+      'Axios',
+    ],
+  },
+  {
+    group: 'Quality & Delivery',
+    items: ['Vitest', 'Testing Library', 'ESLint', 'GitHub Actions', 'Vercel'],
+  },
+  {
+    group: 'Design',
+    items: ['Figma'],
+  },
 ];
 
 // --- Delay ---
@@ -39,8 +59,8 @@ const D_TITLE = 0.15;
 const D_ICON_ROW1_BASE = 0.15;
 const D_ICON_ROW2_BASE = 0.15;
 const D_ICON_STAGGER = 0.1;
-const D_BAR_BASE = 0.15;
-const D_BAR_STAGGER = 0.15;
+const D_GROUP_BASE = 0.15;
+const D_GROUP_STAGGER = 0.1;
 
 // --- Skills section ---
 export function Skills() {
@@ -135,17 +155,34 @@ export function Skills() {
             </div>
           </div>
 
-          {/* Skill bars */}
-          <div className='flex w-full flex-col gap-4 md:basis-90.25 md:grow-6 md:gap-sec-skill-bar'>
-            {SKILLS.map((skill, index) => (
-              <SkillBar
-                key={`${skill.name}-${index}`}
-                name={skill.name}
-                percentage={skill.percentage}
-                index={index}
-                baseDelay={D_BAR_BASE}
-                stagger={D_BAR_STAGGER}
-              />
+          {/* Stack groups */}
+          <div className='flex w-full flex-col gap-6 md:basis-90.25 md:grow-6'>
+            {STACK.map((group, index) => (
+              <motion.div
+                key={group.group}
+                variants={fadeInUp}
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, amount: 0.2 }}
+                transition={transitionDelayed(
+                  D_GROUP_BASE + index * D_GROUP_STAGGER
+                )}
+                className='flex flex-col gap-3'
+              >
+                <h3 className='text-sm font-semibold uppercase tracking-widest text-primary-200'>
+                  {group.group}
+                </h3>
+                <ul className='flex flex-wrap gap-2'>
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className='rounded-full border border-neutral-800 px-3 py-1.5 text-sm font-medium text-neutral-25 md:text-md'
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             ))}
           </div>
         </div>
