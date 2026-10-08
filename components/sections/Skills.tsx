@@ -102,7 +102,7 @@ export function Skills() {
             {/* Tech icon grid */}
             <div className='flex flex-col gap-6'>
               {/* Row 1 */}
-              <div className='flex flex-row justify-between gap-6 md:justify-start'>
+              <div className='flex flex-row justify-evenly gap-6 md:justify-start'>
                 {TECH_ICONS.slice(0, 4).map((icon, i) => (
                   <FloatingBoat key={icon.name} index={i}>
                     <motion.div
@@ -128,7 +128,7 @@ export function Skills() {
               </div>
 
               {/* Row 2 */}
-              <div className='flex flex-row justify-between gap-6 md:justify-start'>
+              <div className='flex flex-row justify-evenly gap-6 md:justify-start'>
                 {TECH_ICONS.slice(4, 8).map((icon, i) => (
                   <FloatingBoat key={icon.name} index={i + 4}>
                     <motion.div
