@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/ui/Button';
 import { ExperienceListItem } from '@/components/ui/ExperienceListItem';
@@ -10,27 +11,33 @@ import { fadeInUp, transitionDelayed } from '@/lib/animations/staggered-item';
 
 // --- Experience comparison data ---
 const COMPARISON = [
-  { self: 'React Expert', other: 'Basic React Knowledge' },
   {
-    self: 'Precise Website Implementation',
-    other: 'Inconsistent Design Translation',
+    self: 'Pixel-accurate design implementation',
+    other: 'Less back-and-forth between design and dev',
   },
   {
-    self: 'TypeScript Proficiency',
-    other: 'Little to No TypeScript Knowledge',
+    self: 'TypeScript by default',
+    other: 'Safer refactors, fewer runtime bugs',
   },
-  { self: 'Clean, Maintainable Code', other: 'Unstructured Code' },
+  { self: 'Automated tests', other: 'Changes ship with confidence' },
   {
-    self: 'Responsive Website Development',
-    other: 'Inconsistent Responsiveness',
+    self: 'CI on every repository',
+    other: 'Broken builds caught before they reach main',
   },
-  { self: 'UI Design Proficiency (Figma)', other: 'No Design Skills' },
+  {
+    self: 'Lighthouse 90+ on mobile',
+    other: 'Fast pages for every user, better SEO',
+  },
+  {
+    self: 'Real REST API integration',
+    other: 'Ready to work with your backend from day one',
+  },
 ];
 
 const D_LABEL = 0.0;
 const D_TITLE = 0.15;
 
-// --- Adjuster: kecepatan animasi mendekat (0→1, lebih kecil = lebih cepat) ---
+// --- Slide timing ---
 const SLIDE_END_MOBILE = 0.4;
 const SLIDE_END = 0.8;
 
@@ -52,7 +59,7 @@ export function Experience({ workRef }: ExperienceProps) {
     Array(COMPARISON.length).fill(null)
   );
 
-  // --- useScroll target sectionRef ---
+  // --- Scroll progress ---
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end end'],
@@ -70,7 +77,7 @@ export function Experience({ workRef }: ExperienceProps) {
     ['70vw', '0vw']
   );
 
-  // --- Deteksi mobile ---
+  // --- Mobile detection ---
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -78,7 +85,7 @@ export function Experience({ workRef }: ExperienceProps) {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  // --- Sync tinggi baris kiri dan kanan ---
+  // --- Row height sync ---
   const syncRowHeights = useCallback(() => {
     leftRowRefs.current.forEach((leftEl, i) => {
       const rightEl = rightRowRefs.current[i];
@@ -97,7 +104,7 @@ export function Experience({ workRef }: ExperienceProps) {
     return () => window.removeEventListener('resize', syncRowHeights);
   }, [syncRowHeights]);
 
-  // --- Sync container minHeight = tinggi section aktual ---
+  // --- Container height sync ---
   useEffect(() => {
     if (!sectionRef.current || !containerRef.current) return;
 
@@ -118,7 +125,7 @@ export function Experience({ workRef }: ExperienceProps) {
     };
   }, []);
 
-  // --- Fix/unfix via DOM ---
+  // --- Pin control ---
   useEffect(() => {
     const unfix = () => {
       if (!isFixedRef.current || !sectionRef.current) return;
@@ -151,7 +158,6 @@ export function Experience({ workRef }: ExperienceProps) {
       const windowHeight = window.innerHeight;
 
       if (isScrollingDown) {
-        // Unfix saat work-top menyentuh top viewport
         if (workRef.current) {
           const workRect = workRef.current.getBoundingClientRect();
           if (workRect.top > windowHeight || workRect.top < 0) {
@@ -159,7 +165,6 @@ export function Experience({ workRef }: ExperienceProps) {
             return;
           }
         }
-        // Fix saat seluruh section sudah masuk viewport
         const shouldFix =
           sectionRect.bottom <= windowHeight && sectionRect.top < 0;
         if (shouldFix) fix();
@@ -214,7 +219,7 @@ export function Experience({ workRef }: ExperienceProps) {
 
             {/* Experience content */}
             <div className='flex w-full flex-col gap-8 md:flex-row md:gap-[clamp(40px,-12.5px+6.94vw,80px)]'>
-              {/* Experience item kiri */}
+              {/* Left column */}
               <motion.div
                 style={{ x: isMobile ? xRight : xLeftDesktop }}
                 className='flex flex-1 flex-col items-center gap-8'
@@ -224,7 +229,7 @@ export function Experience({ workRef }: ExperienceProps) {
                 </h3>
                 <div className='relative h-15 w-15 shrink-0 overflow-hidden rounded-full bg-neutral-950 md:h-20 md:w-20'>
                   <Image
-                    src='/icons/edwin-anderson.png'
+                    src='/images/avatar.webp'
                     alt='yusuf Arif'
                     fill
                     sizes='(min-width: 768px) 80px, 60px'
@@ -249,21 +254,21 @@ export function Experience({ workRef }: ExperienceProps) {
                 </div>
               </motion.div>
 
-              {/* Divider mobile */}
+              {/* Divider */}
               <span className='h-px w-full bg-neutral-800 md:hidden' />
 
-              {/* Experience item kanan */}
+              {/* Right column */}
               <motion.div
                 style={{ x: isMobile ? xRight2 : xRight }}
                 className='flex flex-1 flex-col items-center gap-8'
               >
                 <h3 className='text-xl font-bold text-neutral-25 md:text-sec-card-title'>
-                  ANOTHER TALENT
+                  WHAT YOUR TEAM GETS
                 </h3>
                 <div className='relative h-15 w-15 shrink-0 overflow-hidden rounded-full bg-neutral-950 md:h-20 md:w-20'>
                   <Image
                     src='/icons/others.png'
-                    alt='Other developer'
+                    alt=''
                     fill
                     sizes='(min-width: 768px) 80px, 60px'
                     className='object-cover'
@@ -296,7 +301,9 @@ export function Experience({ workRef }: ExperienceProps) {
               viewport={{ once: true, amount: 0.5 }}
               className='w-[calc(100%-10px)] md:w-60'
             >
-              <Button className='w-full cursor-pointer'>HIRE ME</Button>
+              <Link href='#contact'>
+                <Button className='w-full cursor-pointer'>HIRE ME</Button>
+              </Link>
             </motion.div>
           </div>
         </Container>
