@@ -9,6 +9,7 @@ const redHatDisplay = Red_Hat_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://yusuf-arif.vercel.app'),
   title: 'yusuf Arif | Frontend Developer Portfolio',
   description:
     'Portfolio of yusuf Arif, a Frontend Developer building responsive, fast, and scalable websites.',
