@@ -16,24 +16,24 @@ const workData = [
   },
   {
     id: 2,
-    year: 'Business career',
-    title: 'Division Manager → Director',
+    year: 'Early career',
+    title: 'Wind Turbine Division Manager',
     description:
-      'Led a wind-turbine division, then directed two companies: teams, projects, clients and budgets. That ownership is how I work today.',
+      'Managed a wind-turbine division, including a study visit to Germany to learn from the wind-energy industry there.',
   },
   {
     id: 3,
-    year: '2025',
-    title: 'Back to building',
+    year: 'Business owner',
+    title: 'Owner & Director',
     description:
-      "Started coding again through freeCodeCamp's Responsive Web Design curriculum.",
+      'Ran my own construction company for 15 years, and now own a liquid organic fertilizer manufacturer with day-to-day operations delegated. That ownership is how I work today.',
   },
   {
     id: 4,
-    year: '2026 – Present',
+    year: '2025 – Present',
     title: 'Frontend Developer',
     description:
-      'Graduated from an intensive frontend bootcamp with an A, earned the freeCodeCamp Responsive Web Design certification, and shipped production-grade React and Next.js apps with tests, CI and 90+ mobile Lighthouse scores.',
+      'From Fortran at university to the modern web: started coding again through freeCodeCamp, graduated from an intensive frontend bootcamp with an A, earned freeCodeCamp certificates, and built the projects on this page.',
   },
 ];
 
