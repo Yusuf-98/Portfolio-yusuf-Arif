@@ -216,7 +216,7 @@ export const projects: Project[] = [
     ],
     stack: ['React', 'TypeScript', 'TanStack Query', 'Zustand', 'Tailwind CSS'],
     liveUrl: 'https://movie-app-by-yusuf-ar.vercel.app/',
-    repoUrl: 'https://github.com/Yusuf-98/Movie-App',
+    repoUrl: 'https://github.com/Yusuf-98/Movie-Explorer-App',
     frameRatio: 2.15,
     gallery: [
       {
