@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://yusuf-arif.vercel.app'),
   title: 'yusuf Arif | Frontend Developer Portfolio',
   description:
-    'Portfolio of yusuf Arif, a Frontend Developer building responsive, fast, and scalable websites.',
+    'yusuf Arif is a frontend developer building pixel-accurate React and Next.js apps, with live projects, source code, tests, CI and 90+ mobile Lighthouse scores.',
 };
 
 export default function RootLayout({
