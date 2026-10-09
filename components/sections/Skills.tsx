@@ -64,7 +64,7 @@ const STACK = [
     ],
   },
   {
-    group: 'Design',
+    group: 'Design Handoff',
     items: ['Figma'],
   },
 ];
