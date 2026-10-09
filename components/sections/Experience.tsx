@@ -16,8 +16,9 @@ const COMPARISON = [
     other: 'Less back-and-forth between design and dev',
   },
   {
-    self: 'TypeScript by default',
-    other: 'Safer refactors, fewer runtime bugs',
+    self: '15+ years running my own companies',
+    other:
+      'Ownership, clear communication and deadlines met without micromanagement',
   },
   { self: 'Automated tests', other: 'Changes ship with confidence' },
   {
