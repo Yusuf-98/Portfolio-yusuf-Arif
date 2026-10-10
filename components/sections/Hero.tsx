@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import {
   fadeInUp,
+  fadeInUpFaint,
   fadeInDown,
   fadeInScale,
   transitionDelayed,
@@ -277,7 +278,7 @@ export function Hero() {
 
             {/* Hero title */}
             <motion.h1
-              variants={fadeInUp}
+              variants={fadeInUpFaint}
               initial='hidden'
               animate='visible'
               transition={transitionDelayed(D_TITLE)}

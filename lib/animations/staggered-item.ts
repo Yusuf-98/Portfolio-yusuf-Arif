@@ -32,6 +32,11 @@ export const fadeInUp: Variants = {
   visible: { opacity: 1, y: 0 },
 };
 
+export const fadeInUpFaint: Variants = {
+  hidden: { opacity: 0.1, y: Y },
+  visible: { opacity: 1, y: 0 },
+};
+
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
