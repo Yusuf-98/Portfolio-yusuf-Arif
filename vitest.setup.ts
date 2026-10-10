@@ -23,3 +23,6 @@ if (!('IntersectionObserver' in globalThis)) {
     writable: true,
   });
 }
+
+HTMLCanvasElement.prototype.getContext = (() =>
+  null) as unknown as HTMLCanvasElement['getContext'];
