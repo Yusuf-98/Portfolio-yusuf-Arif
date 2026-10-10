@@ -11,7 +11,6 @@ import {
 } from '@/lib/animations/staggered-item';
 import Image from 'next/image';
 import { Container } from '@/components/layout/Container';
-import { BoxPattern } from '@/components/ui/BoxPattern';
 import { FloatingBoat } from '@/lib/animations/floating-boat';
 
 // --- Delays ---
@@ -30,18 +29,6 @@ export function About() {
       id='about'
       className='relative w-full max-w-360 mx-auto bg-base-black md:pb-30 overflow-x-clip'
     >
-      {/* Box pattern */}
-      <motion.div
-        variants={fadeInDown}
-        initial='hidden'
-        whileInView='visible'
-        viewport={{ once: true, amount: 0.2 }}
-        transition={transitionDelayed(0.0)}
-        className='absolute bottom-0'
-      >
-        <BoxPattern rotate={90} style={{ left: 0 }} />
-      </motion.div>
-
       <Container className='flex flex-col md:pt-42'>
         <div className='flex flex-col items-center gap-4 md:gap-16'>
           {/* About Content */}

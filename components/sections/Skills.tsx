@@ -8,6 +8,7 @@ import {
   transitionDelayed,
 } from '@/lib/animations/staggered-item';
 import { Container } from '@/components/layout/Container';
+import { BoxPattern } from '@/components/ui/BoxPattern';
 import { FloatingBoat } from '@/lib/animations/floating-boat';
 
 // --- Tech icon data ---
@@ -83,8 +84,20 @@ export function Skills() {
   return (
     <section
       id='skills'
-      className='w-full max-w-360 mx-auto bg-base-black py-10 md:pt-19'
+      className='relative w-full max-w-360 mx-auto bg-base-black pt-10 pb-36 md:pt-19 md:pb-25'
     >
+      {/* Box pattern */}
+      <motion.div
+        variants={fadeInDown}
+        initial='hidden'
+        whileInView='visible'
+        viewport={{ once: true, amount: 0.2 }}
+        transition={transitionDelayed(0.0)}
+        className='absolute bottom-0 left-0'
+      >
+        <BoxPattern rotate={90} />
+      </motion.div>
+
       <Container>
         <div className='flex flex-col gap-10 md:flex-row md:items-center md:gap-sec-skill-content'>
           {/* Skills content */}
