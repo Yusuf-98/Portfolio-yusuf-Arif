@@ -15,7 +15,7 @@ const faqData = [
     id: 1,
     question: 'What technologies do you specialize in?',
     answer:
-      'I specialize in React.js, Next.js, Vue.js, Tailwind CSS, and TypeScript, ensuring high-performance, scalable, and maintainable web applications.',
+      'React and Next.js with TypeScript and Tailwind CSS, implementing designs from Figma or similar tools pixel-accurate. For data, I use TanStack Query with REST APIs, and Zustand or Redux Toolkit for client state.',
   },
   {
     id: 2,
@@ -31,21 +31,21 @@ const faqData = [
   },
   {
     id: 4,
-    question: 'Do you take freelance or contract-based projects?',
+    question: 'Are you open to full-time or contract roles?',
     answer:
-      'Yes! I am open to freelance, contract, and full-time opportunities, depending on the project scope and requirements. Feel free to reach out!',
+      "Yes, both. I'm looking for remote frontend roles and can adjust my working hours to overlap with your team's time zone.",
   },
   {
     id: 5,
     question: 'How do you approach a new project?',
     answer:
-      'I start by understanding the project goals and requirements, followed by wireframing or UI implementation, then development, testing, and deployment—ensuring a smooth and efficient workflow.',
+      'I start from the available design, whether in Figma or a similar tool, and the API docs, then break the interface into reusable components, connect them to real data, and cover the key flows with tests and CI before deploying.',
   },
   {
     id: 6,
-    question: 'How can we collaborate?',
+    question: 'How do you work with a remote team?',
     answer:
-      "You can contact me via email, LinkedIn, or GitHub. I usually begin with a consultation to discuss your needs, then propose a plan to bring your vision to life. Let's create something awesome together!",
+      'I keep communication clear and written: regular progress updates, questions raised early, and blockers flagged before they turn into delays.',
   },
 ];
 
