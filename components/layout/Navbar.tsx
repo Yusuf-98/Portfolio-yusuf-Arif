@@ -124,8 +124,8 @@ export function Navbar() {
                 className='flex h-8 w-8 items-center justify-center cursor-pointer md:hidden'
               >
                 <Image
-                  src='/icons/menu-04.png'
-                  alt='Hamburger Menu'
+                  src='/icons/menu.svg'
+                  alt=''
                   width={24}
                   height={24}
                   unoptimized
@@ -177,8 +177,8 @@ export function Navbar() {
                             className='flex h-6 w-6 items-center justify-center cursor-pointer outline-none focus:outline-none focus-visible:outline-none'
                           >
                             <Image
-                              src='/icons/close.png'
-                              alt='Close Menu'
+                              src='/icons/close.svg'
+                              alt=''
                               width={24}
                               height={24}
                               unoptimized
