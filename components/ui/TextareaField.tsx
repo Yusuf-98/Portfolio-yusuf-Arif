@@ -1,4 +1,4 @@
-import { type TextareaHTMLAttributes } from 'react';
+import { useId, type TextareaHTMLAttributes } from 'react';
 
 // --- Textarea Field ---
 interface TextareaFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -7,16 +7,24 @@ interface TextareaFieldProps extends TextareaHTMLAttributes<HTMLTextAreaElement>
 }
 
 export function TextareaField({ label, error, ...props }: TextareaFieldProps) {
+  const id = useId();
+  const errorId = `${id}-error`;
   return (
     <div className='flex flex-col gap-2 w-full'>
       {/* Label */}
-      <label className='text-sm font-semibold text-neutral-25 lg:text-md'>
+      <label
+        htmlFor={id}
+        className='text-sm font-semibold text-neutral-25 lg:text-md'
+      >
         {label}
       </label>
 
       {/* Textarea */}
       <textarea
         {...props}
+        id={id}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? errorId : undefined}
         className={`
           w-full bg-base-black border
           rounded-xl lg:rounded-2xl
@@ -32,7 +40,11 @@ export function TextareaField({ label, error, ...props }: TextareaFieldProps) {
       />
 
       {/* Error */}
-      {error && <p className='text-xs text-red-500'>{error}</p>}
+      {error && (
+        <p id={errorId} className='text-xs text-red-500'>
+          {error}
+        </p>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { type InputHTMLAttributes } from 'react';
+import { useId, type InputHTMLAttributes } from 'react';
 
 // --- Input Field ---
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,16 +7,24 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function InputField({ label, error, ...props }: InputFieldProps) {
+  const id = useId();
+  const errorId = `${id}-error`;
   return (
     <div className='flex flex-col gap-2 w-full'>
       {/* Label */}
-      <label className='text-sm tracking-t-none font-semibold text-neutral-25 lg:text-md'>
+      <label
+        htmlFor={id}
+        className='text-sm tracking-t-none font-semibold text-neutral-25 lg:text-md'
+      >
         {label}
       </label>
 
       {/* Input */}
       <input
         {...props}
+        id={id}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? errorId : undefined}
         className={`
           w-full bg-base-black border
           rounded-xl lg:rounded-2xl
@@ -31,7 +39,11 @@ export function InputField({ label, error, ...props }: InputFieldProps) {
       />
 
       {/* Error */}
-      {error && <p className='text-xs text-red-500'>{error}</p>}
+      {error && (
+        <p id={errorId} className='text-xs text-red-500'>
+          {error}
+        </p>
+      )}
     </div>
   );
 }
