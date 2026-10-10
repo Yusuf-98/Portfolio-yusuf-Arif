@@ -355,7 +355,7 @@ export function Hero() {
                 ref={mobileGrayCanvasRef}
                 width={MOBILE_W}
                 height={MOBILE_H}
-                style={{ width: '100%', height: '100%' }}
+                style={{ width: '100%', height: '100%', filter: 'grayscale(1)' }}
               />
             </div>
 
@@ -453,7 +453,7 @@ export function Hero() {
             ref={desktopGrayCanvasRef}
             width={DESKTOP_W}
             height={DESKTOP_H}
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%', height: '100%', filter: 'grayscale(1)' }}
           />
         </div>
 

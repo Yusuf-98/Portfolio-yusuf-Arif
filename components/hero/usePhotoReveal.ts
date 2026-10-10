@@ -45,17 +45,6 @@ export function usePhotoReveal({ src, width, height }: UsePhotoRevealOptions) {
 
     ctx.clearRect(0, 0, width, height);
     ctx.drawImage(img, offX, offY, drawW, drawH);
-
-    // Manual grayscale conversion (ctx.filter tidak didukung Safari/WebKit)
-    const imageData = ctx.getImageData(0, 0, width, height);
-    const data = imageData.data;
-    for (let i = 0; i < data.length; i += 4) {
-      const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
-      data[i] = gray;
-      data[i + 1] = gray;
-      data[i + 2] = gray;
-    }
-    ctx.putImageData(imageData, 0, 0);
   }, [width, height]);
 
   // --- drawColorReveal ---
@@ -84,7 +73,7 @@ export function usePhotoReveal({ src, width, height }: UsePhotoRevealOptions) {
     ctx.drawImage(mask, 0, 0, width, height);
     ctx.globalCompositeOperation = 'source-over';
 
-    // Gradient 15% bawah
+    // Bottom gradient
     const grad = ctx.createLinearGradient(0, height, 0, height * 0.85);
     grad.addColorStop(0, 'rgba(0,0,0,1)');
     grad.addColorStop(1, 'rgba(0,0,0,0)');

@@ -219,7 +219,7 @@ export default function ContactSection() {
                 ref={grayCanvasRef}
                 width={CONTACT_W}
                 height={CONTACT_H}
-                style={{ width: '100%', height: '94%' }}
+                style={{ width: '100%', height: '94%', filter: 'grayscale(1)' }}
               />
             </div>
 
