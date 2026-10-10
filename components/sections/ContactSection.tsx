@@ -39,7 +39,7 @@ const EMAIL_PARTS = ['yusuf.smg', 'gmail.com'];
 
 const openEmail = (e: React.MouseEvent<HTMLAnchorElement>) => {
   e.preventDefault();
-  window.location.href = `mailto:${EMAIL_PARTS.join('@')}`;
+  window.open(`mailto:${EMAIL_PARTS.join('@')}`, '_blank', 'noopener');
 };
 
 const CONTACT_W = 660;
