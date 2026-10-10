@@ -46,6 +46,7 @@ export default function ContactSection() {
     message: '',
   });
   const [errors, setErrors] = useState({ name: '', email: '', message: '' });
+  const [sending, setSending] = useState(false);
   const [popup, setPopup] = useState<{
     open: boolean;
     type: 'success' | 'failed';
@@ -115,12 +116,30 @@ export default function ContactSection() {
   };
 
   const handleSubmit = async () => {
-    if (!validate()) return;
+    if (sending || !validate()) return;
+    setSending(true);
     try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          subject: `Portfolio message from ${formData.name}`,
+          from_name: 'yusuf Arif Portfolio',
+          ...formData,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message);
       setPopup({ open: true, type: 'success' });
       setFormData({ name: '', email: '', message: '' });
     } catch {
       setPopup({ open: true, type: 'failed' });
+    } finally {
+      setSending(false);
     }
   };
 
@@ -431,10 +450,11 @@ export default function ContactSection() {
                 transition={transitionDelayed(0.75)}
               >
                 <Button
-                  className='w-full cursor-pointer'
+                  className='w-full cursor-pointer disabled:cursor-wait disabled:opacity-70'
                   onClick={handleSubmit}
+                  disabled={sending}
                 >
-                  Send Message
+                  {sending ? 'Sending...' : 'Send Message'}
                 </Button>
               </motion.div>
             </div>
