@@ -1,6 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { FaqItem } from '@/components/ui/FaqItem';
+import { FaqAccordionItem } from '@/components/ui/FaqAccordionItem';
 import { Container } from '../layout/Container';
 import { motion } from 'framer-motion';
 import {
@@ -51,6 +53,8 @@ const faqData = [
 
 // --- FAQ Section ---
 export default function FAQSection() {
+  const [openId, setOpenId] = useState<number | null>(faqData[0].id);
+
   return (
     <section
       id='faq'
@@ -84,7 +88,7 @@ export default function FAQSection() {
           </motion.h2>
         </div>
 
-        {/* --- Desktop: 2 kolom, 3 row --- */}
+        {/* --- Desktop grid --- */}
         <div className='hidden md:flex flex-col gap-10'>
           {/* Row 1 */}
           <div className='flex flex-row items-start gap-10'>
@@ -189,14 +193,18 @@ export default function FAQSection() {
           </div>
         </div>
 
-        {/* --- Mobile: 1 kolom --- */}
+        {/* --- Mobile accordion --- */}
         <div className='flex md:hidden flex-col'>
           {faqData.map((item, index) => (
             <div key={item.id} className='flex flex-col'>
-              <FaqItem
+              <FaqAccordionItem
                 question={item.question}
                 answer={item.answer}
                 index={index}
+                isOpen={openId === item.id}
+                onToggle={() =>
+                  setOpenId((prev) => (prev === item.id ? null : item.id))
+                }
               />
               {index < faqData.length - 1 && (
                 <motion.div

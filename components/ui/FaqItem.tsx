@@ -18,12 +18,6 @@ const getCardVariants = (direction: 'left' | 'right' | 'up') => {
   return { ...fadeInUp, hover: { scale: 1.05 } };
 };
 
-const answerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 0.6 },
-  hover: { opacity: 1 },
-};
-
 // --- FAQ Item ---
 interface FaqItemProps {
   question: string;
@@ -54,7 +48,7 @@ export function FaqItem({
       transition={cardTransition}
     >
       <FloatingBoat index={index}>
-        <div className='flex flex-col gap-2 md:gap-sec-card-title w-full cursor-pointer'>
+        <div className='flex flex-col gap-2 md:gap-sec-card-title w-full'>
           {/* Content: icon + question */}
           <div className='flex flex-row items-start gap-3'>
             {/* Icon */}
@@ -75,13 +69,9 @@ export function FaqItem({
           </div>
 
           {/* Answer */}
-          <motion.p
-            variants={answerVariants}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-            className='font-medium text-neutral-400 text-sm md:text-body-responsive'
-          >
+          <p className='font-medium text-neutral-400 text-sm md:text-body-responsive'>
             {answer}
-          </motion.p>
+          </p>
         </div>
       </FloatingBoat>
     </motion.div>
