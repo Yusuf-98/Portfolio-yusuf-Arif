@@ -19,21 +19,28 @@ import {
 // --- Social media data ---
 const socialMedia = [
   {
-    icon: '/icons/dribbble.png',
-    alt: 'Dribbble',
-    href: 'https://dribbble.com/',
-  },
-  {
-    icon: '/icons/instagram.png',
-    alt: 'Instagram',
-    href: 'https://www.instagram.com/',
-  },
-  {
     icon: '/icons/linkedin.png',
     alt: 'LinkedIn',
-    href: 'https://id.linkedin.com/',
+    href: 'https://www.linkedin.com/in/yusuf-ar/',
+  },
+  {
+    icon: '/icons/github.svg',
+    alt: 'GitHub',
+    href: 'https://github.com/Yusuf-98',
+  },
+  {
+    icon: '/icons/email.svg',
+    alt: 'Email',
+    href: '#contact',
   },
 ];
+
+const EMAIL_PARTS = ['yusuf.smg', 'gmail.com'];
+
+const openEmail = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  e.preventDefault();
+  window.location.href = `mailto:${EMAIL_PARTS.join('@')}`;
+};
 
 const CONTACT_W = 660;
 const CONTACT_H = 873;
@@ -255,8 +262,9 @@ export default function ContactSection() {
                   <a
                     key={item.alt}
                     href={item.href}
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    {...(item.alt === 'Email'
+                      ? { onClick: openEmail }
+                      : { target: '_blank', rel: 'noopener noreferrer' })}
                     className='flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-base-black border border-neutral-800 transition-transform duration-500 hover-scale'
                   >
                     <div className='relative w-8 h-8 lg:w-9.5 lg:h-9.5'>
