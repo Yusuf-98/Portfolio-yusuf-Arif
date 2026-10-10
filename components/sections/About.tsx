@@ -99,7 +99,7 @@ export function About() {
                   transition={transitionXDelayed(D_IMG_1)}
                 >
                   <Image
-                    src='/images/projects/sociality.webp'
+                    src='/images/about/collage-1.webp'
                     alt=''
                     width={762}
                     height={568}
@@ -123,7 +123,7 @@ export function About() {
                   transition={transitionXDelayed(D_IMG_2)}
                 >
                   <Image
-                    src='/images/projects/company-profile.webp'
+                    src='/images/about/collage-2.webp'
                     alt=''
                     width={762}
                     height={568}
@@ -147,7 +147,7 @@ export function About() {
                   transition={transitionDelayed(D_IMG_3)}
                 >
                   <Image
-                    src='/images/projects/resto.webp'
+                    src='/images/about/collage-3.webp'
                     alt=''
                     width={762}
                     height={568}
@@ -191,7 +191,7 @@ export function About() {
                 transition={transitionXDelayed(D_IMG_1)}
               >
                 <Image
-                  src='/images/projects/sociality.webp'
+                  src='/images/about/collage-1.webp'
                   alt=''
                   width={762}
                   height={568}
@@ -214,7 +214,7 @@ export function About() {
                 transition={transitionXDelayed(D_IMG_2)}
               >
                 <Image
-                  src='/images/projects/company-profile.webp'
+                  src='/images/about/collage-2.webp'
                   alt=''
                   width={762}
                   height={568}
@@ -237,7 +237,7 @@ export function About() {
                 transition={transitionDelayed(D_IMG_3)}
               >
                 <Image
-                  src='/images/projects/resto.webp'
+                  src='/images/about/collage-3.webp'
                   alt=''
                   width={762}
                   height={568}
