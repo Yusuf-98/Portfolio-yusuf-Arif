@@ -15,8 +15,8 @@ import {
 const NAV_LINKS = [
   { label: 'Home', href: '#hero' },
   { label: 'About', href: '#about' },
-  { label: 'Skill', href: '#skills' },
   { label: 'Projects', href: '#portfolio' },
+  { label: 'Skill', href: '#skills' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ];

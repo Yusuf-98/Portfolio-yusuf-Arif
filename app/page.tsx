@@ -8,19 +8,17 @@ import { Hero } from '@/components/sections/Hero';
 import PortfolioSection from '@/components/sections/PortfolioSection';
 import { Services } from '@/components/sections/Services';
 import { Skills } from '@/components/sections/Skills';
-import TestimonialsSection from '@/components/sections/TestimonialsSection';
 
 export default function Home() {
   return (
     <main>
       <Navbar />
       <Hero />
-      <Services />
       <About />
+      <PortfolioSection />
+      <Services />
       <Skills />
       <ExperienceWorkWrapper />
-      <PortfolioSection />
-      <TestimonialsSection />
       <FAQSection />
       <ContactSection />
       <Footer />
