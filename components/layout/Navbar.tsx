@@ -28,7 +28,7 @@ function LogoLetters({ className }: { className?: string }) {
   return (
     <span
       className={`overflow-hidden inline-flex leading-none ${className ?? ''}`}
-      style={{ textShadow: '0 2.2ex 0 #91FF02', height: '1.2em' }}
+      style={{ textShadow: '0 1.3em 0 #91FF02', height: '1.3em' }}
     >
       {LOGO_LETTERS.map((char, i) => (
         <span
@@ -89,7 +89,7 @@ export function Navbar() {
                 className='logo-link flex w-full items-center gap-2.25 lg:gap-2'
               >
                 <span className='h-0 border w-6 border-base-white lg:w-10' />
-                <LogoLetters className='text-md font-bold text-primary-200 lg:text-xl lg:pb-2 lg:pt-1.25' />
+                <LogoLetters className='text-md font-bold text-primary-200 lg:text-xl' />
               </Link>
             </motion.div>
           </div>

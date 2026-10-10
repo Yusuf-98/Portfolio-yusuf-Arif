@@ -223,7 +223,7 @@
 
 /* --- Animasi logo hover --- */
 .logo-link:hover .logo-letter {
-  transform: translateY(-2.2ex);
+  transform: translateY(-1.3em);
 }
 
 @media (min-width: 768px) {
