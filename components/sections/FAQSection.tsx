@@ -58,7 +58,7 @@ export default function FAQSection() {
   return (
     <section
       id='faq'
-      className='relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20 z-20'
+      className='defer-render relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20 z-20'
     >
       <Container>
         {/* --- FAQ Header --- */}

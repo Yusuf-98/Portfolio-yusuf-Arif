@@ -84,7 +84,7 @@ export function Skills() {
   return (
     <section
       id='skills'
-      className='relative w-full max-w-360 mx-auto bg-base-black pt-10 pb-32 md:pt-19 md:pb-12'
+      className='defer-render relative w-full max-w-360 mx-auto bg-base-black pt-10 pb-32 md:pt-19 md:pb-12'
     >
       {/* Box pattern */}
       <motion.div

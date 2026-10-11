@@ -221,7 +221,13 @@
   }
 }
 
-/* --- Animasi logo hover --- */
+/* --- Deferred sections --- */
+.defer-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+/* --- Logo hover --- */
 .logo-link:hover .logo-letter {
   transform: translateY(-1.3em);
 }

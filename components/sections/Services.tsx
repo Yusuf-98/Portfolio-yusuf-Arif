@@ -39,7 +39,7 @@ const D_CARD_STAGGER = 0.15;
 // --- Services section ---
 export function Services() {
   return (
-    <section className='w-full max-w-360 mx-auto bg-base-black pt-19 pb-20 md:pt-30 md:pb-17.5'>
+    <section className='defer-render w-full max-w-360 mx-auto bg-base-black pt-19 pb-20 md:pt-30 md:pb-17.5'>
       <Container>
         <div className='flex flex-col gap-6 md:gap-16'>
           {/* Header */}

@@ -27,7 +27,7 @@ export function About() {
   return (
     <section
       id='about'
-      className='relative w-full max-w-360 mx-auto bg-base-black md:pb-17.5 overflow-x-clip'
+      className='defer-render relative w-full max-w-360 mx-auto bg-base-black md:pb-17.5 overflow-x-clip'
     >
       <Container className='flex flex-col md:pt-42'>
         <div className='flex flex-col items-center gap-4 md:gap-16'>

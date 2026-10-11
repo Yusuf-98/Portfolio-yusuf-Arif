@@ -41,13 +41,13 @@ export default function PortfolioSection() {
   return (
     <section
       id='portfolio'
-      className='relative w-full max-w-360 mx-auto bg-base-black pt-30 pb-10 md:py-20 z-20'
+      className='defer-render relative w-full max-w-360 mx-auto bg-base-black pt-30 pb-10 md:py-20 z-20'
     >
       {/* Box pattern (mobile) */}
       <BoxPattern
         rotate={270}
         className='absolute md:hidden'
-        style={{ right: 0, top: '-21.62px' }}
+        style={{ right: 0, top: 0 }}
       />
 
       <Container>
