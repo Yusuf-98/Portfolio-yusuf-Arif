@@ -64,7 +64,6 @@ export default function ContactSection() {
 
   const {
     wrapperRef,
-    grayCanvasRef,
     colorCanvasRef,
     maskRef,
     handleMouseMove,
@@ -204,7 +203,7 @@ export default function ContactSection() {
             onTouchStart={handleTouchStart}
             onTouchEnd={contactLocked ? undefined : handleTouchEnd}
           >
-            {/* Wrapper A: grayscale canvas + mix-blend-luminosity */}
+            {/* Grayscale layer */}
             <div
               ref={wrapperRef}
               className='absolute -top-10 inset-0 mix-blend-luminosity pointer-events-none'
@@ -216,11 +215,18 @@ export default function ContactSection() {
                 height={CONTACT_H}
                 className='hidden'
               />
-              <canvas
-                ref={grayCanvasRef}
+              <Image
+                src='/images/profile-desktop.webp'
+                alt=''
                 width={CONTACT_W}
                 height={CONTACT_H}
-                style={{ width: '100%', height: '94%', filter: 'grayscale(1)' }}
+                unoptimized
+                style={{
+                  width: '100%',
+                  height: '94%',
+                  objectFit: 'cover',
+                  filter: 'grayscale(1)',
+                }}
               />
             </div>
 
@@ -234,7 +240,7 @@ export default function ContactSection() {
               }}
             />
 
-            {/* Wrapper B: color reveal canvas */}
+            {/* Color reveal layer */}
             <div
               className='absolute -top-10 inset-0 pointer-events-none'
               style={{ transform: 'rotate(5deg)' }}

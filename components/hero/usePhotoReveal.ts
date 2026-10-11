@@ -28,32 +28,22 @@ export function usePhotoReveal({
   lazy = false,
 }: UsePhotoRevealOptions) {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const grayCanvasRef = useRef<HTMLCanvasElement>(null);
   const colorCanvasRef = useRef<HTMLCanvasElement>(null);
   const maskRef = useRef<HTMLCanvasElement>(null);
   const colorImgRef = useRef<HTMLImageElement | null>(null);
   const fadeRafRef = useRef<number | null>(null);
 
-  // --- drawGrayscale ---
-  const drawGrayscale = useCallback(() => {
-    const canvas = grayCanvasRef.current;
-    const img = colorImgRef.current;
-    if (!canvas || !img) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const scale = Math.max(
-      width / img.naturalWidth,
-      height / img.naturalHeight
-    );
-    const drawW = img.naturalWidth * scale;
-    const drawH = img.naturalHeight * scale;
-    const offX = (width - drawW) / 2;
-    const offY = (height - drawH) / 2;
-
-    ctx.clearRect(0, 0, width, height);
-    ctx.drawImage(img, offX, offY, drawW, drawH);
-  }, [width, height]);
+  // --- drawGradient ---
+  const drawGradient = useCallback(
+    (ctx: CanvasRenderingContext2D) => {
+      const grad = ctx.createLinearGradient(0, height, 0, height * 0.85);
+      grad.addColorStop(0, 'rgba(0,0,0,1)');
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, width, height);
+    },
+    [width, height]
+  );
 
   // --- drawColorReveal ---
   const drawColorReveal = useCallback(() => {
@@ -81,13 +71,8 @@ export function usePhotoReveal({
     ctx.drawImage(mask, 0, 0, width, height);
     ctx.globalCompositeOperation = 'source-over';
 
-    // Bottom gradient
-    const grad = ctx.createLinearGradient(0, height, 0, height * 0.85);
-    grad.addColorStop(0, 'rgba(0,0,0,1)');
-    grad.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, width, height);
-  }, [width, height]);
+    drawGradient(ctx);
+  }, [width, height, drawGradient]);
 
   // --- paintBrush ---
   const paintBrush = useCallback(
@@ -204,13 +189,16 @@ export function usePhotoReveal({
     triggerFade();
   }, [triggerFade]);
 
-  // --- Init mask canvas ---
+  // --- Init canvases ---
   useEffect(() => {
     const mask = maskRef.current;
-    if (!mask) return;
-    mask.width = width;
-    mask.height = height;
-  }, [width, height]);
+    if (mask) {
+      mask.width = width;
+      mask.height = height;
+    }
+    const ctx = colorCanvasRef.current?.getContext('2d');
+    if (ctx) drawGradient(ctx);
+  }, [width, height, drawGradient]);
 
   // --- Load image ---
   useEffect(() => {
@@ -227,8 +215,6 @@ export function usePhotoReveal({
         .decode()
         .then(() => {
           colorImgRef.current = img;
-          drawGrayscale();
-          drawColorReveal();
         })
         .catch(() => {});
     };
@@ -263,11 +249,10 @@ export function usePhotoReveal({
       query?.removeEventListener('change', handleChange);
       observer?.disconnect();
     };
-  }, [src, media, lazy, drawGrayscale, drawColorReveal]);
+  }, [src, media, lazy]);
 
   return {
     wrapperRef,
-    grayCanvasRef,
     colorCanvasRef,
     maskRef,
     handleMouseMove,

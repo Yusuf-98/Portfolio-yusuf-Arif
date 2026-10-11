@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   fadeInUp,
@@ -80,7 +81,6 @@ export function Hero() {
 
   const {
     wrapperRef: mobileWrapperRef,
-    grayCanvasRef: mobileGrayCanvasRef,
     colorCanvasRef: mobileColorCanvasRef,
     maskRef: mobileMaskRef,
     handleMouseMove: mobileHandleMouseMove,
@@ -106,7 +106,6 @@ export function Hero() {
 
   const {
     wrapperRef: desktopWrapperRef,
-    grayCanvasRef: desktopGrayCanvasRef,
     colorCanvasRef: desktopColorCanvasRef,
     maskRef: desktopMaskRef,
     handleMouseMove,
@@ -341,7 +340,7 @@ export function Hero() {
             {/* Lime background block */}
             <div className='absolute right-0 top-[0%] h-[90.8%] w-[48%] bg-primary-200' />
 
-            {/* Wrapper A: grayscale canvas + mix-blend-luminosity */}
+            {/* Grayscale layer */}
             <div
               ref={mobileWrapperRef}
               className='absolute left-0 top-0 h-[98.1%] w-[98.5%] mix-blend-luminosity pointer-events-none'
@@ -353,11 +352,18 @@ export function Hero() {
                 height={MOBILE_H}
                 className='hidden'
               />
-              <canvas
-                ref={mobileGrayCanvasRef}
+              <Image
+                src='/images/profile-mobile.webp'
+                alt=''
                 width={MOBILE_W}
                 height={MOBILE_H}
-                style={{ width: '100%', height: '100%', filter: 'grayscale(1)' }}
+                unoptimized
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  filter: 'grayscale(1)',
+                }}
               />
             </div>
 
@@ -370,7 +376,7 @@ export function Hero() {
               }}
             />
 
-            {/* Wrapper B: color reveal canvas */}
+            {/* Color reveal layer */}
             <div
               className='absolute left-0 top-0 h-[98.1%] w-[98.5%] pointer-events-none'
               style={{ transform: 'rotate(5deg)' }}
@@ -439,7 +445,7 @@ export function Hero() {
         {/* Lime background block */}
         <div className='absolute left-[52.1%] top-0 h-[98.9%] w-[47.9%] bg-primary-200 pointer-events-none' />
 
-        {/* Wrapper A: grayscale canvas + mix-blend-luminosity */}
+        {/* Grayscale layer */}
         <div
           ref={desktopWrapperRef}
           className='absolute h-[98.9%] w-[98.2%] mix-blend-luminosity pointer-events-none'
@@ -451,11 +457,18 @@ export function Hero() {
             height={DESKTOP_H}
             className='hidden'
           />
-          <canvas
-            ref={desktopGrayCanvasRef}
+          <Image
+            src='/images/profile-desktop.webp'
+            alt=''
             width={DESKTOP_W}
             height={DESKTOP_H}
-            style={{ width: '100%', height: '100%', filter: 'grayscale(1)' }}
+            unoptimized
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              filter: 'grayscale(1)',
+            }}
           />
         </div>
 
@@ -469,7 +482,7 @@ export function Hero() {
           }}
         />
 
-        {/* Wrapper B: color reveal canvas */}
+        {/* Color reveal layer */}
         <div
           className='absolute h-[98.9%] w-[98.2%] pointer-events-none'
           style={{ transform: 'rotate(5deg)' }}
