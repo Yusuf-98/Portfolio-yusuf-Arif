@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 // --- NeonLine ---
 interface NeonLineProps {
@@ -31,18 +32,26 @@ export function NeonLine({
     right: `linear-gradient(${axis}, transparent 0%, #252B37 20%, ${color} 100%)`,
   };
 
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: '200px' });
+
   return (
     <motion.div
+      ref={ref}
       className={`absolute inset-0 pointer-events-none ${className ?? ''}`}
       style={{ background: gradientMap[align] }}
-      animate={{ opacity: [0, opacity, 0] }}
-      transition={{
-        duration: duration * 2,
-        ease: 'easeInOut',
-        repeat: Infinity,
-        delay,
-        times: [0, 0.5, 1],
-      }}
+      animate={inView ? { opacity: [0, opacity, 0] } : { opacity: 0 }}
+      transition={
+        inView
+          ? {
+              duration: duration * 2,
+              ease: 'easeInOut',
+              repeat: Infinity,
+              delay,
+              times: [0, 0.5, 1],
+            }
+          : { duration: 0 }
+      }
     />
   );
 }
