@@ -5,6 +5,7 @@ interface UsePhotoRevealOptions {
   src: string;
   width: number;
   height: number;
+  media?: string;
 }
 
 const BRUSH_STAMPS = [
@@ -18,7 +19,12 @@ const BRUSH_STAMPS = [
   { dx: 50, dy: -10, r: 22 },
 ];
 
-export function usePhotoReveal({ src, width, height }: UsePhotoRevealOptions) {
+export function usePhotoReveal({
+  src,
+  width,
+  height,
+  media,
+}: UsePhotoRevealOptions) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const grayCanvasRef = useRef<HTMLCanvasElement>(null);
   const colorCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -206,15 +212,32 @@ export function usePhotoReveal({ src, width, height }: UsePhotoRevealOptions) {
 
   // --- Load image ---
   useEffect(() => {
-    const img = new window.Image();
-    img.crossOrigin = 'anonymous';
-    img.src = src;
-    img.onload = () => {
-      colorImgRef.current = img;
-      drawGrayscale();
-      drawColorReveal();
+    let started = false;
+    const load = () => {
+      if (started) return;
+      started = true;
+      const img = new window.Image();
+      img.crossOrigin = 'anonymous';
+      img.src = src;
+      img.onload = () => {
+        colorImgRef.current = img;
+        drawGrayscale();
+        drawColorReveal();
+      };
     };
-  }, [src, drawGrayscale, drawColorReveal]);
+
+    const query = media ? window.matchMedia(media) : null;
+    if (!query || query.matches) {
+      load();
+      return;
+    }
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (e.matches) load();
+    };
+    query.addEventListener('change', handleChange);
+    return () => query.removeEventListener('change', handleChange);
+  }, [src, media, drawGrayscale, drawColorReveal]);
 
   return {
     wrapperRef,

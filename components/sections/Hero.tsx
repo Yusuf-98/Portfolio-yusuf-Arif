@@ -65,15 +65,17 @@ const renderTitle = (text: string) => {
 
 export function Hero() {
   const mobile = usePhotoReveal({
-    src: '/images/profile-mobile.png',
+    src: '/images/profile-mobile.webp',
     width: MOBILE_W,
     height: MOBILE_H,
+    media: '(max-width: 767.98px)',
   });
 
   const desktop = usePhotoReveal({
-    src: '/images/profile-desktop.png',
+    src: '/images/profile-desktop.webp',
     width: DESKTOP_W,
     height: DESKTOP_H,
+    media: '(min-width: 768px)',
   });
 
   const {

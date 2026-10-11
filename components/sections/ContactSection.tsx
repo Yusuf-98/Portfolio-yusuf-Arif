@@ -74,7 +74,7 @@ export default function ContactSection() {
     handleTouchStart,
     handleTouchEnd,
   } = usePhotoReveal({
-    src: '/images/profile-desktop.png',
+    src: '/images/profile-desktop.webp',
     width: CONTACT_W,
     height: CONTACT_H,
   });
