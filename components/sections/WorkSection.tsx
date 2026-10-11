@@ -13,7 +13,7 @@ import {
 // --- Work Section ---
 export default function WorkSection() {
   return (
-    <section className='relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20 z-20'>
+    <section className='defer-render relative w-full max-w-360 mx-auto bg-base-black py-10 md:py-20 z-20'>
       {/* --- Box pattern --- */}
       <motion.div
         variants={fadeIn}
