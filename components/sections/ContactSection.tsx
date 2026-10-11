@@ -77,6 +77,7 @@ export default function ContactSection() {
     src: '/images/profile-desktop.webp',
     width: CONTACT_W,
     height: CONTACT_H,
+    lazy: true,
   });
 
   // --- Mobile "tap to lock" reveal ---

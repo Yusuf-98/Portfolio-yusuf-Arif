@@ -6,6 +6,7 @@ interface UsePhotoRevealOptions {
   width: number;
   height: number;
   media?: string;
+  lazy?: boolean;
 }
 
 const BRUSH_STAMPS = [
@@ -24,6 +25,7 @@ export function usePhotoReveal({
   width,
   height,
   media,
+  lazy = false,
 }: UsePhotoRevealOptions) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const grayCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -213,31 +215,55 @@ export function usePhotoReveal({
   // --- Load image ---
   useEffect(() => {
     let started = false;
+    let observer: IntersectionObserver | null = null;
+
     const load = () => {
       if (started) return;
       started = true;
       const img = new window.Image();
       img.crossOrigin = 'anonymous';
       img.src = src;
-      img.onload = () => {
-        colorImgRef.current = img;
-        drawGrayscale();
-        drawColorReveal();
-      };
+      img
+        .decode()
+        .then(() => {
+          colorImgRef.current = img;
+          drawGrayscale();
+          drawColorReveal();
+        })
+        .catch(() => {});
+    };
+
+    const loadWhenNear = () => {
+      const wrapper = wrapperRef.current;
+      if (!lazy || !wrapper || !('IntersectionObserver' in window)) {
+        load();
+        return;
+      }
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            observer?.disconnect();
+            load();
+          }
+        },
+        { rootMargin: '600px 0px' }
+      );
+      observer.observe(wrapper);
     };
 
     const query = media ? window.matchMedia(media) : null;
-    if (!query || query.matches) {
-      load();
-      return;
-    }
-
     const handleChange = (e: MediaQueryListEvent) => {
-      if (e.matches) load();
+      if (e.matches) loadWhenNear();
     };
-    query.addEventListener('change', handleChange);
-    return () => query.removeEventListener('change', handleChange);
-  }, [src, media, drawGrayscale, drawColorReveal]);
+
+    if (!query || query.matches) loadWhenNear();
+    else query.addEventListener('change', handleChange);
+
+    return () => {
+      query?.removeEventListener('change', handleChange);
+      observer?.disconnect();
+    };
+  }, [src, media, lazy, drawGrayscale, drawColorReveal]);
 
   return {
     wrapperRef,
