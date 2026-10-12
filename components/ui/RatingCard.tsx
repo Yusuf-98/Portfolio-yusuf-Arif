@@ -154,7 +154,7 @@ export function RatingCard({
       {phase !== 'hidden' && (
         <>
           {/* Card shimmer */}
-          <span ref={shimmerRef} aria-hidden className='card-shimmer-stripe' />
+          <span ref={shimmerRef} aria-hidden className='card-shimmer-stripe z-20' />
 
           {/* Score */}
           <p
@@ -178,7 +178,7 @@ export function RatingCard({
             {TAGS.map((tag, i) => (
               <motion.span
                 key={tag}
-                className='rounded-full border border-neutral-800 bg-[#FFC933]/20 px-2.5 py-0.5 font-medium text-[#FFC933]'
+                className='font-medium text-[#FFC933]'
                 style={{ fontSize: 'clamp(11px, 9.2px + 0.24vw, 13px)' }}
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={
@@ -188,6 +188,11 @@ export function RatingCard({
                 }
                 transition={{ duration: 0.15, ease: 'easeOut' }}
               >
+                {i > 0 && (
+                  <span aria-hidden className='mr-1.5'>
+                    ·
+                  </span>
+                )}
                 {tag}
               </motion.span>
             ))}
