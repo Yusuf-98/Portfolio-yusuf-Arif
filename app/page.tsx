@@ -1,4 +1,5 @@
 import Footer from '@/components/layout/Footer';
+import { LazySection } from '@/components/layout/LazySection';
 import { Navbar } from '@/components/layout/Navbar';
 import { About } from '@/components/sections/About';
 import ContactSection from '@/components/sections/ContactSection';
@@ -45,14 +46,30 @@ export default function Home() {
       />
       <Navbar />
       <Hero />
-      <About />
-      <PortfolioSection />
-      <Services />
-      <Skills />
-      <ExperienceWorkWrapper />
-      <FAQSection />
-      <ContactSection />
-      <Footer />
+      <LazySection>
+        <About />
+      </LazySection>
+      <LazySection>
+        <PortfolioSection />
+      </LazySection>
+      <LazySection>
+        <Services />
+      </LazySection>
+      <LazySection>
+        <Skills />
+      </LazySection>
+      <LazySection>
+        <ExperienceWorkWrapper />
+      </LazySection>
+      <LazySection>
+        <FAQSection />
+      </LazySection>
+      <LazySection>
+        <ContactSection />
+      </LazySection>
+      <LazySection>
+        <Footer />
+      </LazySection>
     </main>
   );
 }
