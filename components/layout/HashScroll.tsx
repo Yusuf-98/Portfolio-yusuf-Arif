@@ -3,6 +3,10 @@
 import { useEffect } from 'react';
 import { revealAllSections } from './LazySection';
 
+// --- Scroll events ---
+export const HASH_SCROLL_START = 'hash-scroll:start';
+export const HASH_SCROLL_END = 'hash-scroll:end';
+
 // --- Hash scroll ---
 export function HashScroll() {
   useEffect(() => {
@@ -13,6 +17,8 @@ export function HashScroll() {
       cancelAnimationFrame(frame);
       cancelled = false;
       revealAllSections();
+      window.dispatchEvent(new Event(HASH_SCROLL_START));
+      const finish = () => window.dispatchEvent(new Event(HASH_SCROLL_END));
 
       let waited = 0;
       let started = false;
@@ -21,7 +27,7 @@ export function HashScroll() {
       let corrections = 0;
 
       const step = () => {
-        if (cancelled) return;
+        if (cancelled) return finish();
         const el = document.getElementById(id);
         const locked = document.body.hasAttribute('data-scroll-locked');
 
@@ -41,7 +47,7 @@ export function HashScroll() {
 
         if (still >= 6 && el) {
           const offset = el.getBoundingClientRect().top;
-          if (Math.abs(offset) <= 2 || corrections >= 2) return;
+          if (Math.abs(offset) <= 2 || corrections >= 2) return finish();
           corrections += 1;
           still = 0;
           window.scrollTo({ top: window.scrollY + offset, behavior: 'smooth' });
