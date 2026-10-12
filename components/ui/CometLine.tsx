@@ -63,6 +63,7 @@ export function CometLine({
             ? { width: '100%', height: cometSize, background: cometGradient }
             : { height: '100%', width: cometSize, background: cometGradient }),
         }}
+        initial={isVertical ? { y: -cometSize } : { x: -cometSize }}
         animate={
           isVertical ? { y: [-cometSize, length] } : { x: [-cometSize, length] }
         }
