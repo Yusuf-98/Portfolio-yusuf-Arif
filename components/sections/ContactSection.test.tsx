@@ -44,6 +44,23 @@ describe('ContactSection form', () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
+  it('clears errors on a click outside the form only', async () => {
+    mockFetch(apiResponse(true));
+    const user = userEvent.setup();
+    render(<ContactSection />);
+
+    await user.click(screen.getByRole('button', { name: 'Send Message' }));
+    await user.click(screen.getByLabelText('Email'));
+    expect(screen.getByText('Name is required')).toBeInTheDocument();
+
+    await user.click(screen.getByText("LET'S GET IN TOUCH"));
+    expect(screen.getByText('Name is required')).toBeInTheDocument();
+
+    await user.click(document.body);
+    expect(screen.queryByText('Name is required')).not.toBeInTheDocument();
+    expect(screen.queryByText('Message is required')).not.toBeInTheDocument();
+  });
+
   it('rejects an invalid email address', async () => {
     const fetchMock = mockFetch(apiResponse(true));
     const user = userEvent.setup();

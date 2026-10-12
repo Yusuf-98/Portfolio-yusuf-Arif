@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BoxPattern } from '@/components/ui/BoxPattern';
@@ -54,6 +54,8 @@ export default function ContactSection() {
   });
   const [errors, setErrors] = useState({ name: '', email: '', message: '' });
   const [sending, setSending] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
+  const hasErrors = Boolean(errors.name || errors.email || errors.message);
   const [popup, setPopup] = useState<{
     open: boolean;
     type: 'success' | 'failed';
@@ -78,7 +80,18 @@ export default function ContactSection() {
     height: CONTACT_H,
   });
 
-  // --- Mobile "tap to lock" reveal ---
+  // --- Error reset ---
+  useEffect(() => {
+    if (!hasErrors) return;
+    const handlePointerDown = (e: PointerEvent) => {
+      if (formRef.current?.contains(e.target as Node)) return;
+      setErrors({ name: '', email: '', message: '' });
+    };
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, [hasErrors]);
+
+  // --- Tap to lock ---
   const [contactLocked, setContactLocked] = useState(false);
 
   const lockContactReveal = () => {
@@ -374,6 +387,7 @@ export default function ContactSection() {
 
           {/* --- Contact Form --- */}
           <motion.div
+            ref={formRef}
             variants={fadeInUp}
             initial='hidden'
             whileInView='visible'
