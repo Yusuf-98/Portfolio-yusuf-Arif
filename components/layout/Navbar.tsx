@@ -48,6 +48,10 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const visible = useHideOnScroll();
+  const [hideHome, setHideHome] = useState(false);
+
+  if (!isScrolled && hideHome) setHideHome(false);
+  if (isScrolled && !visible && !hideHome) setHideHome(true);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 8);
@@ -111,6 +115,9 @@ export function Navbar() {
                   animate='visible'
                   transition={transitionDelayed(1.5 + i * 0.1)}
                   whileHover={{ y: -2 }}
+                  className={
+                    hideHome && link.href === '#hero' ? 'hidden' : undefined
+                  }
                 >
                   <Link
                     href={link.href}
