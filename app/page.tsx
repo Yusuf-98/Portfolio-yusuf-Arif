@@ -46,28 +46,28 @@ export default function Home() {
       />
       <Navbar />
       <Hero />
-      <LazySection>
+      <LazySection mobileHeight={752} desktopHeight={670}>
         <About />
       </LazySection>
-      <LazySection>
+      <LazySection mobileHeight={3309} desktopHeight={1492}>
         <PortfolioSection />
       </LazySection>
-      <LazySection>
+      <LazySection mobileHeight={1063} desktopHeight={681}>
         <Services />
       </LazySection>
-      <LazySection>
+      <LazySection mobileHeight={1220} desktopHeight={796}>
         <Skills />
       </LazySection>
-      <LazySection>
+      <LazySection mobileHeight={2783} desktopHeight={2321}>
         <ExperienceWorkWrapper />
       </LazySection>
-      <LazySection>
+      <LazySection mobileHeight={977} desktopHeight={1010}>
         <FAQSection />
       </LazySection>
-      <LazySection>
+      <LazySection mobileHeight={1266} desktopHeight={879}>
         <ContactSection />
       </LazySection>
-      <LazySection>
+      <LazySection mobileHeight={65} desktopHeight={81}>
         <Footer />
       </LazySection>
     </main>

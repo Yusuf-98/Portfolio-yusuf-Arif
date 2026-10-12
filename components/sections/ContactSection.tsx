@@ -76,7 +76,6 @@ export default function ContactSection() {
     src: '/images/profile-desktop.webp',
     width: CONTACT_W,
     height: CONTACT_H,
-    lazy: true,
   });
 
   // --- Mobile "tap to lock" reveal ---
@@ -153,7 +152,7 @@ export default function ContactSection() {
   return (
     <section
       id='contact'
-      className='defer-render relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pt-10 md:pt-0 pb-25 md:pb-30 z-20 overflow-x-clip'
+      className='relative w-full max-w-360 mx-auto border-t border-neutral-800 bg-base-black pt-10 md:pt-0 pb-25 md:pb-30 z-20 overflow-x-clip'
     >
       {/* BoxPattern top left */}
       <motion.div

@@ -100,23 +100,9 @@ export function Experience({ workRef }: ExperienceProps) {
   }, []);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          observer.disconnect();
-          syncRowHeights();
-        }
-      },
-      { rootMargin: '600px 0px' }
-    );
-    observer.observe(section);
+    syncRowHeights();
     window.addEventListener('resize', syncRowHeights);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('resize', syncRowHeights);
-    };
+    return () => window.removeEventListener('resize', syncRowHeights);
   }, [syncRowHeights]);
 
   // --- Container height sync ---
@@ -203,7 +189,7 @@ export function Experience({ workRef }: ExperienceProps) {
     <div ref={containerRef} className='relative overflow-hidden'>
       <motion.section
         ref={sectionRef}
-        className='defer-render w-full max-w-360 mx-auto bg-base-black pt-6 pb-20 md:pt-24 md:pb-25 overflow-x-clip'
+        className='w-full max-w-360 mx-auto bg-base-black pt-6 pb-20 md:pt-24 md:pb-25 overflow-x-clip'
         style={{ position: 'relative', zIndex: 10 }}
       >
         <Container>

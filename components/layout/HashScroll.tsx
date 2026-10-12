@@ -1,16 +1,21 @@
 'use client';
 
 import { useEffect } from 'react';
+import { revealAllSections } from './LazySection';
 
-// --- Hash scroll correction ---
+// --- Hash scroll ---
 export function HashScroll() {
   useEffect(() => {
     let frame = 0;
     let cancelled = false;
 
-    const settle = (id: string) => {
+    const scrollToId = (id: string) => {
       cancelAnimationFrame(frame);
       cancelled = false;
+      revealAllSections();
+
+      let waited = 0;
+      let started = false;
       let lastY = -1;
       let still = 0;
       let corrections = 0;
@@ -18,14 +23,25 @@ export function HashScroll() {
       const step = () => {
         if (cancelled) return;
         const el = document.getElementById(id);
-        if (!el) return;
+        const locked = document.body.hasAttribute('data-scroll-locked');
+
+        if (!started) {
+          waited += 1;
+          if (el && (!locked || waited > 90) && waited > 1) {
+            started = true;
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+          frame = requestAnimationFrame(step);
+          return;
+        }
+
         if (window.scrollY === lastY) still += 1;
         else still = 0;
         lastY = window.scrollY;
 
-        if (still >= 6) {
+        if (still >= 6 && el) {
           const offset = el.getBoundingClientRect().top;
-          if (Math.abs(offset) <= 2 || corrections >= 3) return;
+          if (Math.abs(offset) <= 2 || corrections >= 2) return;
           corrections += 1;
           still = 0;
           window.scrollTo({ top: window.scrollY + offset, behavior: 'smooth' });
@@ -38,23 +54,26 @@ export function HashScroll() {
     const handleClick = (e: MouseEvent) => {
       const link = (e.target as Element | null)?.closest?.('a[href^="#"]');
       const id = link?.getAttribute('href')?.slice(1);
-      if (id) settle(id);
+      if (!id) return;
+      e.preventDefault();
+      history.pushState(null, '', `#${id}`);
+      scrollToId(id);
     };
     const cancel = () => {
       cancelled = true;
     };
 
-    document.addEventListener('click', handleClick);
+    document.addEventListener('click', handleClick, true);
     window.addEventListener('wheel', cancel, { passive: true });
-    window.addEventListener('touchstart', cancel, { passive: true });
+    window.addEventListener('touchmove', cancel, { passive: true });
     window.addEventListener('keydown', cancel);
-    if (window.location.hash) settle(window.location.hash.slice(1));
+    if (window.location.hash) scrollToId(window.location.hash.slice(1));
 
     return () => {
       cancelAnimationFrame(frame);
-      document.removeEventListener('click', handleClick);
+      document.removeEventListener('click', handleClick, true);
       window.removeEventListener('wheel', cancel);
-      window.removeEventListener('touchstart', cancel);
+      window.removeEventListener('touchmove', cancel);
       window.removeEventListener('keydown', cancel);
     };
   }, []);

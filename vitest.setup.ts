@@ -26,3 +26,5 @@ if (!('IntersectionObserver' in globalThis)) {
 
 HTMLCanvasElement.prototype.getContext = (() =>
   null) as unknown as HTMLCanvasElement['getContext'];
+
+HTMLImageElement.prototype.decode = () => Promise.resolve();

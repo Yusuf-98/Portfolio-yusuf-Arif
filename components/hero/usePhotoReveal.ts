@@ -6,7 +6,6 @@ interface UsePhotoRevealOptions {
   width: number;
   height: number;
   media?: string;
-  lazy?: boolean;
 }
 
 const BRUSH_STAMPS = [
@@ -25,7 +24,6 @@ export function usePhotoReveal({
   width,
   height,
   media,
-  lazy = false,
 }: UsePhotoRevealOptions) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const colorCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -203,7 +201,6 @@ export function usePhotoReveal({
   // --- Load image ---
   useEffect(() => {
     let started = false;
-    let observer: IntersectionObserver | null = null;
 
     const load = () => {
       if (started) return;
@@ -219,37 +216,16 @@ export function usePhotoReveal({
         .catch(() => {});
     };
 
-    const loadWhenNear = () => {
-      const wrapper = wrapperRef.current;
-      if (!lazy || !wrapper || !('IntersectionObserver' in window)) {
-        load();
-        return;
-      }
-      observer = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((entry) => entry.isIntersecting)) {
-            observer?.disconnect();
-            load();
-          }
-        },
-        { rootMargin: '600px 0px' }
-      );
-      observer.observe(wrapper);
-    };
-
     const query = media ? window.matchMedia(media) : null;
     const handleChange = (e: MediaQueryListEvent) => {
-      if (e.matches) loadWhenNear();
+      if (e.matches) load();
     };
 
-    if (!query || query.matches) loadWhenNear();
+    if (!query || query.matches) load();
     else query.addEventListener('change', handleChange);
 
-    return () => {
-      query?.removeEventListener('change', handleChange);
-      observer?.disconnect();
-    };
-  }, [src, media, lazy]);
+    return () => query?.removeEventListener('change', handleChange);
+  }, [src, media]);
 
   return {
     wrapperRef,
