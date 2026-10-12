@@ -91,7 +91,7 @@ export function Hero() {
     handleTouchEnd,
   } = mobile;
 
-  // --- Mobile "tap to lock" reveal ---
+  // --- Tap to lock ---
   const [mobileLocked, setMobileLocked] = useState(false);
 
   const lockMobileReveal = () => {
