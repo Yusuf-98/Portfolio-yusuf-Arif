@@ -1,7 +1,3 @@
-'use client';
-
-import { useRef, useState } from 'react';
-import { useAnimationFrame } from 'framer-motion';
 import {
   HELM_VIEWBOX,
   HELM_LATITUDE_LINES,
@@ -22,6 +18,7 @@ type HelmOverlayProps = {
 
 const HOLOGRAM = '#414651';
 
+// --- Geometry helpers ---
 function pointsToPath(points: [number, number][]) {
   return points
     .map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`)
@@ -37,42 +34,76 @@ function bandForY(y: number) {
   return bandForLevel(Math.max(0, Math.min(1, level)));
 }
 
-function opacityForBand(bandIdx: number, peak: number) {
-  return Math.max(0, 1 - 0.5 * Math.abs(bandIdx - peak));
+// --- Band paths ---
+const bandPaths = new Map<
+  string,
+  { band: number; width: number; d: string[] }
+>();
+
+function addPath(band: number, width: number, d: string) {
+  const key = `${band}-${width}`;
+  const entry = bandPaths.get(key) ?? { band, width, d: [] };
+  entry.d.push(d);
+  bandPaths.set(key, entry);
 }
 
-function segmentByBand(points: [number, number][], peak: number) {
-  const segments = [];
+function addSegments(points: [number, number][], width: number) {
   for (let i = 0; i < points.length - 1; i++) {
     const [x1, y1] = points[i];
     const [x2, y2] = points[i + 1];
-    const midY = (y1 + y2) / 2;
-    const band = bandForY(midY);
-    const op = opacityForBand(band, peak);
-    if (op <= 0.02) continue;
-    segments.push({
-      d: `M${x1.toFixed(2)},${y1.toFixed(2)} L${x2.toFixed(2)},${y2.toFixed(2)}`,
-      opacity: op,
-      key: `${i}`,
-    });
+    addPath(
+      bandForY((y1 + y2) / 2),
+      width,
+      `M${x1.toFixed(2)},${y1.toFixed(2)} L${x2.toFixed(2)},${y2.toFixed(2)}`
+    );
   }
-  return segments;
 }
+
+HELM_LATITUDE_LINES.forEach((line) =>
+  addPath(bandForLevel(line.level), 1.5, pointsToPath(line.points))
+);
+HELM_MERIDIAN_LINES.forEach((line) =>
+  addSegments(line.points, line.isRim ? 3 : 1.5)
+);
+addSegments(HELM_OUTLINE_LEFT, 3);
+addSegments(HELM_OUTLINE_RIGHT, 3);
+
+const PATHS = [...bandPaths.values()].map((p) => ({
+  key: `${p.band}-${p.width}`,
+  band: p.band,
+  width: p.width,
+  d: p.d.join(' '),
+}));
+
+// --- Band keyframes ---
+const PEAK_SPAN = HELM_N_BANDS + 1;
+
+function bandOpacity(band: number, peak: number) {
+  return Math.max(0, 1 - 0.5 * Math.abs(band - peak));
+}
+
+function bandKeyframes(band: number) {
+  const center = ((band + 1) / PEAK_SPAN) * 100;
+  const half = (2 / PEAK_SPAN) * 100;
+  const stops: [number, number][] = [[0, bandOpacity(band, -1)]];
+  if (center - half > 0) stops.push([center - half, 0]);
+  stops.push([center, 1]);
+  if (center + half < 100) stops.push([center + half, 0]);
+  stops.push([100, bandOpacity(band, HELM_N_BANDS)]);
+  const body = stops
+    .map(([at, op]) => `${at.toFixed(3)}%{opacity:${op.toFixed(3)}}`)
+    .join('');
+  return `@keyframes helm-band-${band}{${body}}`;
+}
+
+const KEYFRAMES = Array.from({ length: HELM_N_BANDS }, (_, b) =>
+  bandKeyframes(b)
+).join('');
 
 export default function HelmOverlay({
   className,
   cycleDurationMs = 3600,
 }: HelmOverlayProps) {
-  const [peak, setPeak] = useState(-1);
-  const startRef = useRef<number | null>(null);
-
-  useAnimationFrame((time) => {
-    if (startRef.current === null) startRef.current = time;
-    const elapsed = (time - startRef.current) % cycleDurationMs;
-    const progress = elapsed / cycleDurationMs;
-    setPeak(-1 + progress * (HELM_N_BANDS - -1));
-  });
-
   return (
     <svg
       viewBox={`0 0 ${HELM_VIEWBOX.width} ${HELM_VIEWBOX.height}`}
@@ -86,60 +117,22 @@ export default function HelmOverlay({
       }}
       preserveAspectRatio='xMidYMid meet'
     >
-      {/* --- Latitude rings (horizontal-ish) --- */}
-      {HELM_LATITUDE_LINES.map((line, idx) => {
-        const band = bandForLevel(line.level);
-        const op = opacityForBand(band, peak);
-        if (op <= 0.02) return null;
-        return (
-          <path
-            key={`lat-${idx}`}
-            d={pointsToPath(line.points)}
-            stroke={HOLOGRAM}
-            strokeWidth={1.5}
-            fill='none'
-            opacity={op}
-            strokeLinecap='round'
-          />
-        );
-      })}
+      {/* Band animation */}
+      <style>{KEYFRAMES}</style>
 
-      {/* --- Meridian lines (vertical-ish) --- */}
-      {HELM_MERIDIAN_LINES.map((line, lineIdx) =>
-        segmentByBand(line.points, peak).map((seg) => (
-          <path
-            key={`mer-${lineIdx}-${seg.key}`}
-            d={seg.d}
-            stroke={HOLOGRAM}
-            strokeWidth={line.isRim ? 3 : 1.5}
-            fill='none'
-            opacity={seg.opacity}
-            strokeLinecap='round'
-          />
-        ))
-      )}
-
-      {/* --- Outline left & right --- */}
-      {segmentByBand(HELM_OUTLINE_LEFT, peak).map((seg) => (
+      {/* Wireframe bands */}
+      {PATHS.map((p) => (
         <path
-          key={`out-l-${seg.key}`}
-          d={seg.d}
+          key={p.key}
+          d={p.d}
           stroke={HOLOGRAM}
-          strokeWidth={3}
+          strokeWidth={p.width}
           fill='none'
-          opacity={seg.opacity}
           strokeLinecap='round'
-        />
-      ))}
-      {segmentByBand(HELM_OUTLINE_RIGHT, peak).map((seg) => (
-        <path
-          key={`out-r-${seg.key}`}
-          d={seg.d}
-          stroke={HOLOGRAM}
-          strokeWidth={3}
-          fill='none'
-          opacity={seg.opacity}
-          strokeLinecap='round'
+          style={{
+            opacity: 0,
+            animation: `helm-band-${p.band} ${cycleDurationMs}ms linear infinite`,
+          }}
         />
       ))}
     </svg>
