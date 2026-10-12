@@ -336,12 +336,12 @@
   background: linear-gradient(
     135deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.2) 50%,
     transparent 100%
   );
   transform: translateX(-100%) translateY(-100%) skewX(-15deg);
 }
 
 .card-shimmer-run {
-  animation: card-shimmer-slide 0.9s ease 0s 1 forwards;
+  animation: card-shimmer-slide 1.4s ease 0s 1 forwards;
 }
