@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Red_Hat_Display } from 'next/font/google';
+import { HashScroll } from '@/components/layout/HashScroll';
 import './globals.css';
 
 const redHatDisplay = Red_Hat_Display({
@@ -22,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className={`${redHatDisplay.variable}`}>
-      <body className='antialiased'>{children}</body>
+      <body className='antialiased'>
+        {children}
+        <HashScroll />
+      </body>
     </html>
   );
 }
