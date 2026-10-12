@@ -33,6 +33,7 @@ function rewrite(html) {
 
 function allFiles(dir) {
   return readdirSync(dir).flatMap((name) => {
+    if (name === 'node_modules' || name === '.git' || name === 'cache') return [];
     const path = join(dir, name);
     const stat = statSync(path);
     if (stat.isDirectory()) return allFiles(path);
@@ -41,7 +42,7 @@ function allFiles(dir) {
 }
 
 function isHomePage(html) {
-  return html.includes('id="hero"') && html.includes('</body>');
+  return /^<!DOCTYPE html>/i.test(html) && html.includes('id="hero"');
 }
 
 // --- Check ---
@@ -55,15 +56,13 @@ if (process.argv.includes('--check')) {
 }
 
 // --- Rewrite ---
-const files = [NEXT_FILE];
-if (existsSync(VERCEL_OUTPUT)) {
-  const outputFiles = allFiles(VERCEL_OUTPUT);
-  console.log(`defer-next-scripts: ${outputFiles.length} files in ${VERCEL_OUTPUT}`);
-  outputFiles.slice(0, 40).forEach((f) => console.log(`  ${f}`));
-  files.push(...outputFiles.filter((f) => isHomePage(readFileSync(f, 'utf8'))));
-} else if (process.env.VERCEL) {
-  console.warn(`defer-next-scripts: ${VERCEL_OUTPUT} not found`);
-}
+const roots = ['.', ...(existsSync(VERCEL_OUTPUT) ? [VERCEL_OUTPUT] : [])];
+const files = [
+  ...new Set(
+    roots.flatMap(allFiles).filter((f) => isHomePage(readFileSync(f, 'utf8')))
+  ),
+];
+console.log(`defer-next-scripts: ${files.length} home page copies found`);
 
 for (const file of files) {
   const html = readFileSync(file, 'utf8');
