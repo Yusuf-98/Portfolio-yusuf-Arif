@@ -31,16 +31,17 @@ function rewrite(html) {
     .replace('</body>', `${loader}</body>`);
 }
 
-function htmlFiles(dir) {
+function allFiles(dir) {
   return readdirSync(dir).flatMap((name) => {
     const path = join(dir, name);
-    if (statSync(path).isDirectory()) return htmlFiles(path);
-    return name.endsWith('.html') ? [path] : [];
+    const stat = statSync(path);
+    if (stat.isDirectory()) return allFiles(path);
+    return stat.size < 2_000_000 ? [path] : [];
   });
 }
 
 function isHomePage(html) {
-  return html.includes('id="hero"');
+  return html.includes('id="hero"') && html.includes('</body>');
 }
 
 // --- Check ---
@@ -56,7 +57,10 @@ if (process.argv.includes('--check')) {
 // --- Rewrite ---
 const files = [NEXT_FILE];
 if (existsSync(VERCEL_OUTPUT)) {
-  files.push(...htmlFiles(VERCEL_OUTPUT).filter((f) => isHomePage(readFileSync(f, 'utf8'))));
+  const outputFiles = allFiles(VERCEL_OUTPUT);
+  console.log(`defer-next-scripts: ${outputFiles.length} files in ${VERCEL_OUTPUT}`);
+  outputFiles.slice(0, 40).forEach((f) => console.log(`  ${f}`));
+  files.push(...outputFiles.filter((f) => isHomePage(readFileSync(f, 'utf8'))));
 } else if (process.env.VERCEL) {
   console.warn(`defer-next-scripts: ${VERCEL_OUTPUT} not found`);
 }
