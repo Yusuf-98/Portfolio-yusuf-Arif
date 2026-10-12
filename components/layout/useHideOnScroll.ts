@@ -39,7 +39,7 @@ export function useHideOnScroll(threshold = 10) {
     const onJumpEnd = () => {
       jumping.current = false;
       lastScrollY.current = window.scrollY;
-      setVisible(window.scrollY <= 0);
+      setVisible(window.scrollY <= threshold);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
