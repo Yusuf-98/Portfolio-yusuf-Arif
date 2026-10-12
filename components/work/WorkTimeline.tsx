@@ -150,14 +150,14 @@ export default function WorkTimeline() {
     const gBottom = centerYs[3];
     const gHeight = gBottom - gTop;
 
-    // Direct DOM update — bypass React render cycle
+    // Line position
     const el = lineWrapperRef.current;
     el.style.left = `${bubbleCenterX}px`;
     el.style.top = `${gTop}px`;
     el.style.height = `${gHeight}px`;
     el.style.display = gHeight > 0 ? 'block' : 'none';
 
-    // Segments hanya update via state (tidak perlu secepat posisi)
+    // Segments
     const segs: SegmentGeometry[] = [];
     for (let i = 0; i < 3; i++) {
       const fromBottom = bubbleRects[i]!.bottom - containerRect.top - gTop;
@@ -189,7 +189,7 @@ export default function WorkTimeline() {
 
   return (
     <div ref={containerRef} className='relative w-full'>
-      {/* --- Garis: direct DOM position --- */}
+      {/* --- Line --- */}
       <div
         ref={lineWrapperRef}
         className='absolute w-px pointer-events-none z-0 -translate-x-1/2'
@@ -219,7 +219,7 @@ export default function WorkTimeline() {
               key={item.id}
               className='relative flex items-center gap-4 md:gap-0'
             >
-              {/* --- Mobile: bubble kiri + card kanan --- */}
+              {/* --- Mobile row --- */}
               <div className='md:hidden shrink-0 self-center'>
                 <WorkBubble
                   ref={(el) => {
@@ -252,7 +252,7 @@ export default function WorkTimeline() {
                 )}
               </div>
 
-              {/* Spacer kiri */}
+              {/* Left spacer */}
               <div className='hidden md:block w-7.5 lg:w-16 shrink-0' />
 
               {/* Bubble desktop */}
@@ -268,7 +268,7 @@ export default function WorkTimeline() {
                 />
               </div>
 
-              {/* Spacer kanan */}
+              {/* Right spacer */}
               <div className='hidden md:block w-7.5 lg:w-16 shrink-0' />
 
               <div className='hidden md:block w-[calc(50%-54px)] lg:w-[calc(50%-88px)] shrink-0'>

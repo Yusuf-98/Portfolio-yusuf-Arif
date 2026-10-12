@@ -202,7 +202,7 @@ export function PhotoReveal({ src, width, height }: PhotoRevealProps) {
       {/* Hidden mask canvas */}
       <canvas ref={maskRef} width={width} height={height} className='hidden' />
 
-      {/* Grayscale canvas dengan luminosity effect */}
+      {/* Grayscale canvas */}
       <canvas
         ref={grayCanvasRef}
         width={width}

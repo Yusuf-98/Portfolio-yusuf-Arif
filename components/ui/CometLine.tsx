@@ -34,7 +34,7 @@ export function CometLine({
 
   return (
     <>
-      {/* Garis neutral-800 — digambar dari 0 ke 100% sekali via clipPath */}
+      {/* Base line */}
       <motion.div
         className='absolute inset-0 pointer-events-none bg-neutral-800'
         initial={
@@ -54,7 +54,7 @@ export function CometLine({
         }}
       />
 
-      {/* Comet loop — mulai setelah garis selesai tergambar */}
+      {/* Comet loop */}
       <motion.div
         className='absolute pointer-events-none'
         style={{

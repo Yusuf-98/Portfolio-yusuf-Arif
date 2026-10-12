@@ -64,7 +64,7 @@ export function usePhotoReveal({
     ctx.clearRect(0, 0, width, height);
     ctx.drawImage(img, offX, offY, drawW, drawH);
 
-    // Clip by brush mask
+    // Brush clip
     ctx.globalCompositeOperation = 'destination-in';
     ctx.drawImage(mask, 0, 0, width, height);
     ctx.globalCompositeOperation = 'source-over';

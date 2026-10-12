@@ -43,7 +43,7 @@ export default function PortfolioSection() {
       id='portfolio'
       className='relative w-full max-w-360 mx-auto bg-base-black pt-30 pb-10 md:py-20 z-20'
     >
-      {/* Box pattern (mobile) */}
+      {/* Mobile box pattern */}
       <BoxPattern
         rotate={270}
         className='absolute md:hidden'
@@ -80,7 +80,7 @@ export default function PortfolioSection() {
 
         {/* --- Portfolio Content --- */}
 
-        {/* Desktop: 2 rows × 3 cards */}
+        {/* Desktop grid */}
         <div className='hidden md:flex flex-col gap-12'>
           {/* Row 1 */}
           <div className='flex flex-row gap-5'>
@@ -177,7 +177,7 @@ export default function PortfolioSection() {
           </Button>
         </div>
 
-        {/* Box pattern (desktop) */}
+        {/* Desktop box pattern */}
         <motion.div
           variants={fadeInDown}
           initial='hidden'

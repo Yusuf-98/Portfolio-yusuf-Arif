@@ -127,7 +127,7 @@ export function Hero() {
       id='hero'
       className='relative -mt-20 w-full max-w-360 mx-auto bg-base-black'
     >
-      {/* Vertical lines - desktop */}
+      {/* Vertical desktop lines */}
       <div
         className='absolute top-0 bottom-0 w-px hidden md:block overflow-hidden'
         style={{ left: '26%' }}
@@ -146,7 +146,7 @@ export function Hero() {
         />
       </div>
 
-      {/* Vertical lines - mobile */}
+      {/* Vertical mobile lines */}
       <div
         className='absolute w-px md:hidden overflow-hidden'
         style={{ left: '75%', top: 81, height: 482 }}
@@ -160,7 +160,7 @@ export function Hero() {
         <CometLine direction='vertical' length={563} delay={0.5} duration={5} />
       </div>
 
-      {/* Horizontal line - desktop only */}
+      {/* Horizontal desktop bottom line */}
       <div
         className='absolute bottom-0 h-px hidden md:block overflow-hidden'
         style={{ left: 0, right: 0 }}
@@ -319,7 +319,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Profile photo - mobile */}
+          {/* Mobile photo */}
           <motion.div
             variants={fadeInScale}
             initial='hidden'
@@ -425,7 +425,7 @@ export function Hero() {
         />
       </Container>
 
-      {/* Profile photo - desktop */}
+      {/* Desktop photo */}
       <motion.div
         variants={fadeInScale}
         initial='hidden'

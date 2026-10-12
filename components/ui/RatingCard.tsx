@@ -112,7 +112,7 @@ export function RatingCard({
       )}
       style={style}
     >
-      {/* --- SVG border draw intro --- */}
+      {/* --- Border draw --- */}
       {(phase === 'drawing' || phase === 'typing') && (
         <svg
           className='pointer-events-none absolute inset-0 overflow-visible'

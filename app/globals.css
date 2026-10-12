@@ -123,7 +123,7 @@
   --spacing-10xl: 128px;
   --spacing-11xl: 140px;
 
-  /* --- Responsive font size tokens --- */
+  /* --- Font size tokens --- */
   --text-body-responsive: clamp(0.875rem, 0.732rem + 0.298vw, 1rem);
   --text-body-responsive--line-height: clamp(
     1.75rem,

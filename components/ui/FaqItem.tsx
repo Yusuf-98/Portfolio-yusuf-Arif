@@ -49,7 +49,7 @@ export function FaqItem({
     >
       <FloatingBoat index={index}>
         <div className='flex flex-col gap-2 md:gap-sec-card-title w-full'>
-          {/* Content: icon + question */}
+          {/* Content */}
           <div className='flex flex-row items-start gap-3'>
             {/* Icon */}
             <div className='relative shrink-0 w-6 h-6 md:w-8 md:h-8 mt-1'>
