@@ -49,7 +49,7 @@
   --color-lime-100: #1d3300;
 
   /* --- Font family --- */
-  --font-display: var(--font-red-hat-display), sans-serif;
+  --font-display: 'Red Hat Display', sans-serif;
 
   /* --- Typography scale --- */
   --text-display-4xl: 80px;
